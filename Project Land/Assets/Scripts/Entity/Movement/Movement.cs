@@ -5,6 +5,7 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
 	private CharacterController charController;
+	private PlayerAnimator animator;
 
 	[SerializeField] private float jumpForce = 3f;
 	[SerializeField] private float speed = 5f;
@@ -16,6 +17,7 @@ public class Movement : MonoBehaviour
 	private void Awake()
 	{
 		charController = GetComponent<CharacterController>();
+		animator = GetComponent<PlayerAnimator>();
 	}
 
 	private void FixedUpdate()
@@ -32,16 +34,28 @@ public class Movement : MonoBehaviour
 		Vector3 move = moveVelocity + verticalVelocity * Vector3.up;
 
 		charController.Move(move);
+
+		animator.SetSpeed(moveVelocity.magnitude);
 	}
 
 	public void SetMove(Vector3 dir)
 	{
-		if (charController.isGrounded)
-		{
-			verticalVelocity = dir.y * jumpForce;
-		}
-
 		dir.y = 0;
 		moveVelocity = dir;
+	}
+
+	public void Jump()
+	{
+		if (charController.isGrounded)
+		{
+			verticalVelocity = jumpForce;
+			animator.SetJumpTrigger(true);
+		}
+	}
+
+	public void SetRotate(Vector3 dir)
+	{
+		dir.y = 0;
+		transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dir), 0.05f);
 	}
 }

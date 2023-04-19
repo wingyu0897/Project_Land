@@ -16,8 +16,11 @@ public class PlayerInput : MonoBehaviour
 		float x = Input.GetAxisRaw("Horizontal");
 		float z = Input.GetAxisRaw("Vertical");
 
-		float y = Input.GetAxisRaw("Jump");
+		if (Input.GetKey(KeyCode.Space))
+			movement.Jump();
 
-		movement.SetMove(new Vector3(x, y, z));
+		movement.SetMove(new Vector3(x, 0, z));
+		if (x != 0 || z != 0)
+			movement.SetRotate(Quaternion.Euler(0, 45, 0) * new Vector3(x, 0, z));
 	}
 }
