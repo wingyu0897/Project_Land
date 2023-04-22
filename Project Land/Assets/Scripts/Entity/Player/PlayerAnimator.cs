@@ -8,6 +8,7 @@ public class PlayerAnimator : MonoBehaviour
 
 	private readonly int speedHash = Animator.StringToHash("speed");
 	private readonly int jumpHash = Animator.StringToHash("jump");
+	private readonly int rollHash = Animator.StringToHash("roll");
 
 	private void Awake()
 	{
@@ -29,5 +30,10 @@ public class PlayerAnimator : MonoBehaviour
 		{
 			animator.ResetTrigger(jumpHash);
 		}
+	}
+
+	public void SetRollTrigger()
+	{
+		animator.SetTrigger(rollHash);
 	}
 }

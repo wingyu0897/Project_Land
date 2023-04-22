@@ -4,23 +4,45 @@ using UnityEngine;
 
 public class PlayerInput : MonoBehaviour
 {
-    private Movement movement;
+    private PlayerMovement movement;
+	private PlayerActionData actionData;
 
 	private void Awake()
 	{
-		movement = GetComponent<Movement>();
+		movement = GetComponent<PlayerMovement>();
+		actionData = GetComponent<PlayerActionData>();
 	}
 
 	private void Update()
 	{
+		UpdateRollingInput();
+		UpdateJumpInput();
+		UpdateMoveInput();
+	}
+
+	private void UpdateMoveInput()
+	{
+		if (actionData.isRolling) return;
+
 		float x = Input.GetAxisRaw("Horizontal");
 		float z = Input.GetAxisRaw("Vertical");
 
+		movement.SetMove(new Vector3(x, 0, z));
+	}
+
+	private void UpdateJumpInput()
+	{
+		if (actionData.isRolling) return;
+
 		if (Input.GetKey(KeyCode.Space))
 			movement.Jump();
+	}
 
-		movement.SetMove(new Vector3(x, 0, z));
-		if (x != 0 || z != 0)
-			movement.SetRotate(Quaternion.Euler(0, 45, 0) * new Vector3(x, 0, z));
+	private void UpdateRollingInput()
+	{
+		if (actionData.isRolling) return;
+
+		if (Input.GetKeyDown(KeyCode.LeftShift))
+			movement.Roll();
 	}
 }
