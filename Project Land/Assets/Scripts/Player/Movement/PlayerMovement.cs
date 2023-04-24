@@ -9,7 +9,6 @@ public class PlayerMovement : MonoBehaviour
 	private PlayerActionData actionData;
 
 	// Properties // 하드코딩
-	[SerializeField] private float jumpForce = 3f;
 	[SerializeField] private float speed = 5f;
 	[SerializeField] private float gravity = -9.81f;
 
@@ -20,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
 	private void Awake()
 	{
 		charController = GetComponent<CharacterController>();
-		animator = GetComponent<PlayerAnimator>();
+		animator = transform.Find("Visual").GetComponent<PlayerAnimator>();
 		actionData = GetComponent<PlayerActionData>();
 	}
 
@@ -56,15 +55,6 @@ public class PlayerMovement : MonoBehaviour
 		dir.y = 0;
 		inputVelocity = dir;
 		moveVelocity = dir;
-	}
-
-	public void Jump()
-	{
-		if (charController.isGrounded)
-		{
-			verticalVelocity = jumpForce;
-			animator.SetJumpTrigger(true);
-		}
 	}
 
 	public void Roll(Vector3 dir = default(Vector3))

@@ -12,7 +12,7 @@ public class PlayerAnimator : MonoBehaviour
 
 	private void Awake()
 	{
-		animator = transform.Find("Visual").GetComponent<Animator>();
+		animator = GetComponent<Animator>();
 	}
 
 	public void SetSpeed(float speed)
