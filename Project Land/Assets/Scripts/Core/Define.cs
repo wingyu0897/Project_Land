@@ -6,14 +6,14 @@ public class Define : MonoBehaviour
 {
     public static Define Instance;
 
-	public GameObject player;
+	public Transform player;
 	public Transform inventoryTrm;
 
 	private void Awake()
 	{
 		Instance = this;
 		
-		player = GameObject.Find("Player");
+		player = GameObject.Find("Player").transform;
 		inventoryTrm = GameObject.Find("Inventory").transform;
 	}
 }

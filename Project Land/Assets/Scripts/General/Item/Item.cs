@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class Item : MonoBehaviour
 {
-    public ItemDataSO data;
+	public ItemDataSO data;
 
 	protected Collider coll;
 	protected Rigidbody rigid;
