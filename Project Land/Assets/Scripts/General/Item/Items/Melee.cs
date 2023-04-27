@@ -6,11 +6,11 @@ public class Melee : Item
 {
 	public MeleeItemDataSO meleeData;
 
-	private PlayerInput input;
-	private PlayerMovement movement;
-	private PlayerActionData actionData;
-	private PlayerAnimator animator;
-	private DamageCaster damageCaster;
+	protected PlayerInput input;
+	protected PlayerMovement movement;
+	protected PlayerActionData actionData;
+	protected PlayerAnimator animator;
+	protected DamageCaster damageCaster;
 
 	protected virtual void Start()
 	{
@@ -36,7 +36,7 @@ public class Melee : Item
 		input.OnRollingAction += AttackEndHandle;
 	}
 
-	public void AttackStartHandle()
+	public virtual void AttackStartHandle()
 	{
 		movement.StopMovement();
 
@@ -51,7 +51,7 @@ public class Melee : Item
 		actionData.canChange = false;
 	}
 
-	public void AttackEndHandle()
+	public virtual void AttackEndHandle()
 	{
 		if (!actionData.isAttacking) return;
 
@@ -66,7 +66,7 @@ public class Melee : Item
 		actionData.canChange = true;
 	}
 
-	public void AttackHandle()
+	public virtual void AttackHandle()
 	{
 		damageCaster.SphereCast(meleeData.attackRadius);
 	}
