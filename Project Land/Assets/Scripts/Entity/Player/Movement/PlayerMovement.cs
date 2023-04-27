@@ -39,7 +39,7 @@ public class PlayerMovement : MonoBehaviour
 
 	private void CalculateMoveVelocity()
 	{
-		if (actionData.isRolling) return;
+		if (!actionData.isActive) return;
 
 		inputVelocity.Normalize();
 		moveVelocity = Quaternion.Euler(0, 45, 0) * inputVelocity;
@@ -68,6 +68,7 @@ public class PlayerMovement : MonoBehaviour
 		if (!charController.isGrounded) return;
 
 		actionData.isRolling = true;
+		actionData.isActive = false;
 		animator.SetRollTrigger();
 
 		if (dir == default(Vector3))
@@ -84,6 +85,7 @@ public class PlayerMovement : MonoBehaviour
 		yield return new WaitForSeconds(1f);
 
 		actionData.isRolling = false;
+		actionData.isActive = true;
 	}
 
 	public void SetRotate(Vector3 dir, float lerpSpeed = 0.15f)

@@ -21,16 +21,15 @@ public class PlayerInput : MonoBehaviour
 
 	private void Update()
 	{
-		UpdateRollingInput();
 		UpdateMoveInput();
-		UpdateDropItemInput();
-		UpdateHotbarInput();
+		UpdateRollingInput();
 		UpdateAttackInput();
+		UpdateItemInput();
 	}
 
 	private void UpdateMoveInput()
 	{
-		if (actionData.isRolling || !actionData.isActive) return;
+		if (!actionData.isActive) return;
 
 		float x = Input.GetAxisRaw("Horizontal");
 		float z = Input.GetAxisRaw("Vertical");
@@ -47,6 +46,13 @@ public class PlayerInput : MonoBehaviour
 			OnRollingAction?.Invoke();
 			movement.Roll();
 		}
+	}
+
+	private void UpdateItemInput()
+	{
+		if (!actionData.canChange) return;
+		UpdateDropItemInput();
+		UpdateHotbarInput();
 	}
 
 	private void UpdateDropItemInput()
@@ -73,7 +79,7 @@ public class PlayerInput : MonoBehaviour
 
 	private void UpdateAttackInput()
 	{
-		if (actionData.isAttacking) return;
+		if (!actionData.isActive) return;
 
 		if (Input.GetMouseButtonDown(0))
 		{

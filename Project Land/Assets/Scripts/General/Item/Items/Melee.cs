@@ -48,6 +48,7 @@ public class Melee : Item
 
 		actionData.isActive = false;
 		actionData.isAttacking = true;
+		actionData.canChange = false;
 	}
 
 	public void AttackEndHandle()
@@ -62,6 +63,7 @@ public class Melee : Item
 		animator.Animator.applyRootMotion = false;
 		actionData.isActive = true;
 		actionData.isAttacking = false;
+		actionData.canChange = true;
 	}
 
 	public void AttackHandle()
