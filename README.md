@@ -1,2 +1,2 @@
 # $Project$ $Land$
-Project Land의 저장소입니다.
+Project Land
