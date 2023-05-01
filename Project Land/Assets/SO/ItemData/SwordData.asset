@@ -16,4 +16,4 @@ MonoBehaviour:
   image: {fileID: 0}
   maxCapacity: 1
   prefab: {fileID: 0}
-  attackRadius: 1.4
+  attackRadius: 1.6

@@ -23,16 +23,18 @@ public class Melee : Item
 
 	public override void OnDeselect()
 	{
-		gameObject.SetActive(false);
-		input.OnAttackAction -= AttackStartHandle;
+		base.OnDeselect();
+
+		input.OnAttackClickAction -= AttackStartHandle;
 		input.OnRollingAction -= AttackEndHandle;
 		AttackEndHandle();
 	}
 
 	public override void OnSelect()
 	{
-		gameObject.SetActive(true);
-		input.OnAttackAction += AttackStartHandle;
+		base.OnSelect();
+
+		input.OnAttackClickAction += AttackStartHandle;
 		input.OnRollingAction += AttackEndHandle;
 	}
 

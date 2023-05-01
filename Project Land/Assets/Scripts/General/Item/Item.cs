@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Item : MonoBehaviour
+public class Item : MonoBehaviour
 {
 	public ItemDataSO data;
 
@@ -39,6 +39,13 @@ public abstract class Item : MonoBehaviour
 		rigid.isKinematic = false;
 	}
 
-	public abstract void OnSelect();
-	public abstract void OnDeselect();
+	public virtual void OnSelect()
+	{
+		gameObject.SetActive(true);
+	}
+
+	public virtual void OnDeselect()
+	{
+		gameObject.SetActive(false);
+	}
 }

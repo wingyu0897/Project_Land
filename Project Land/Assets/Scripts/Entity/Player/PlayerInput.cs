@@ -9,7 +9,9 @@ public class PlayerInput : MonoBehaviour
 	private PlayerActionData actionData;
 	private PlayerInventory inventory;
 
-	public event Action OnAttackAction = null;
+	public event Action OnAttackClickAction = null;
+	public event Action OnClickAction = null;
+	public event Action OnStartAcquisitionAction = null;
 	public event Action OnRollingAction = null;
 
 	private void Awake()
@@ -23,7 +25,8 @@ public class PlayerInput : MonoBehaviour
 	{
 		UpdateMoveInput();
 		UpdateRollingInput();
-		UpdateAttackInput();
+		UpdateClickInput();
+		UpdateStartAcquisitionInput();
 		UpdateItemInput();
 	}
 
@@ -77,13 +80,21 @@ public class PlayerInput : MonoBehaviour
 		}
 	}
 
-	private void UpdateAttackInput()
+	private void UpdateStartAcquisitionInput()
 	{
-		if (!actionData.isActive) return;
+		if (Input.GetKeyDown(KeyCode.E))
+		{
+			OnStartAcquisitionAction?.Invoke();
+		}
+	}
 
+	private void UpdateClickInput()
+	{
 		if (Input.GetMouseButtonDown(0))
 		{
-			OnAttackAction?.Invoke();
+			if (!actionData.isAttacking && actionData.isActive)
+				OnAttackClickAction?.Invoke();
+			OnClickAction?.Invoke();
 		}
 	}
 }
