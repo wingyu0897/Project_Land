@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0889219086185f44989e303886e7c9d8, type: 3}
   m_Name: SwordData
   m_EditorClassIdentifier: 
-  itemName: 
+  itemName: Sword
   image: {fileID: 0}
   maxCapacity: 1
-  prefab: {fileID: 0}
-  attackRadius: 1.6
+  prefab: {fileID: 100006, guid: a45a25ec0193de54fbd3efca6e19755e, type: 3}
+  attackRadius: 1.7

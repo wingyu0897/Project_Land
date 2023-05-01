@@ -40,7 +40,7 @@ public class ResourceManager : MonoBehaviour
 
 	private void ResourceFinding()
 	{
-		if (!finding)
+		if (!finding || !actionData.isActive)
 		{
 			resourceUI.gameObject.SetActive(false);
 			return;

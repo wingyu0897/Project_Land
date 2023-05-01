@@ -42,7 +42,7 @@ public class PlayerInput : MonoBehaviour
 
 	private void UpdateRollingInput()
 	{
-		if (actionData.isRolling) return;
+		if (actionData.isRolling || !actionData.isActive) return;
 
 		if (Input.GetKeyDown(KeyCode.LeftShift))
 		{
