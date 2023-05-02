@@ -42,7 +42,7 @@ public class PlayerInput : MonoBehaviour
 
 	private void UpdateRollingInput()
 	{
-		if (actionData.isRolling || !actionData.isActive) return;
+		if (actionData.isRolling || actionData.isObtaining) return;
 
 		if (Input.GetKeyDown(KeyCode.LeftShift))
 		{
@@ -82,6 +82,8 @@ public class PlayerInput : MonoBehaviour
 
 	private void UpdateStartAcquisitionInput()
 	{
+		if (actionData.isRolling) return;
+
 		if (Input.GetKeyDown(KeyCode.E))
 		{
 			OnStartAcquisitionAction?.Invoke();

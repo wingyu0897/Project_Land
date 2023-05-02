@@ -2,71 +2,39 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Axe : Melee
+public class Axe : ObtainableMelee
 {
-	protected ResourceManager resManager;
-
-	protected override void Start()
+	public override void ObtainStartHandle()
 	{
-		base.Start();
-		resManager = Define.Instance.player.GetComponent<ResourceManager>();
+		base.ObtainStartHandle();
 	}
 
-	public override void OnDeselect()
+	public override void ObtainEndHandle()
 	{
-		base.OnDeselect();
-		input.OnClickAction -= ObtainStartHandle;
-		resManager.OnStartObtaining -= StartObtain;
-	}
-
-	public override void OnSelect()
-	{
-		base.OnSelect();
-		input.OnClickAction += ObtainStartHandle;
-		resManager.OnStartObtaining += StartObtain;
-	}
-
-	public void ObtainStartHandle()
-	{
-		if (actionData.isObtaining == false) return;
-		if (animator.Animator.applyRootMotion == true) return;
-
-		animator.Animator.applyRootMotion = true;
-		animator.SetSwordAttackBool(true);
-		animator.SetAttackTrigger(true);
-		animator.OnEvent += ObtainHandle;
-		animator.OnEnd += ObtainEndHandle;
-	}
-
-	public virtual void ObtainEndHandle()
-	{
-		animator.ResetTransform();
+		base.ObtainEndHandle();
 		animator.SetSwordAttackBool(false);
-		animator.OnEvent -= ObtainHandle;
-		animator.OnEnd -= ObtainEndHandle;
-		animator.Animator.applyRootMotion = false;
 	}
 
-	public void ObtainHandle()
+	public override void ObtainHandle()
 	{
-		resManager.currentResource?.Obtain();
+		base.ObtainHandle();
 	}
 
-	public void StartObtain()
+	public override void StartObtain()
 	{
 		AttackEndHandle();
-		actionData.isActive = false;
-		actionData.canChange = false;
-		resManager.OnStopObtaining += StopObtain;
+		base.StartObtain();
 	}
 
-	public void StopObtain()
+	public override void StopObtain()
 	{
-		animator.ResetTransform();
 		animator.SetSwordAttackBool(false);
-		animator.OnEvent -= ObtainHandle;
-		animator.OnEnd -= ObtainEndHandle;
-		animator.Animator.applyRootMotion = false;
-		resManager.OnStopObtaining -= StopObtain;
+		base.StopObtain();
+	}
+
+	public override void ObtainAnimation()
+	{
+		animator.SetSwordAttackBool(true);
+		animator.SetAttackTrigger(true);
 	}
 }
