@@ -6,7 +6,7 @@ public class DamageCaster : MonoBehaviour
 {
     public void SphereCast(float radius)
 	{
-		RaycastHit[] hits = Physics.SphereCastAll(transform.position - -transform.forward * 1, radius, transform.forward, 1f);
+		RaycastHit[] hits = Physics.SphereCastAll(transform.position + (-transform.forward * 1), radius, transform.forward, 1f);
 
 		foreach (RaycastHit hit in hits)
 		{

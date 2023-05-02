@@ -93,4 +93,9 @@ public class PlayerMovement : MonoBehaviour
 		dir.y = 0;
 		transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dir), lerpSpeed);
 	}
+
+	public void SetPosition(Vector3 pos)
+	{
+		charController.Move(pos);
+	}
 }

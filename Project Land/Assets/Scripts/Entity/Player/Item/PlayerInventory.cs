@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +14,7 @@ public class Space<T> where T : Item
 {
 	public List<T> item;
 	public GameObject hotbar;
+	public TextMeshProUGUI countText;
 
 	public Space()
 	{
@@ -22,6 +24,19 @@ public class Space<T> where T : Item
 	public System.Type GetItemType()
 	{
 		return item[0].GetType();
+	}
+
+	public void SetCountText()
+	{
+		if (item.Count > 1)
+		{
+			countText.gameObject.SetActive(true);
+			countText.text = item.Count.ToString();
+		}
+		else
+		{
+			countText.gameObject.SetActive(false);
+		}
 	}
 }
 
@@ -53,8 +68,7 @@ public class PlayerInventory : MonoBehaviour
 
 		space.item.Add(item);
 		item.OnPickUp();
-		SetHotbar(space);
-
+		SetHotbar(ref space);
 		spaces.Add(space);
 
 		return space;
@@ -77,7 +91,7 @@ public class PlayerInventory : MonoBehaviour
 				{
 					s.item.Add(item);
 					item.OnPickUp();
-					SetHotbar(s);
+					s.SetCountText();
 
 					success = true;
 					return true;
@@ -115,6 +129,7 @@ public class PlayerInventory : MonoBehaviour
 			item.OnDrop();
 		}
 		spaces.Remove(spaces.Find(s => s.Equals(space)));
+		space.SetCountText();
 		UnsetHotbar(space.hotbar);
 	}
 	#endregion
@@ -159,13 +174,15 @@ public class PlayerInventory : MonoBehaviour
 	#endregion
 
 	#region UI
-	private void SetHotbar(Space<Item> space)
+	private void SetHotbar(ref Space<Item> space)
 	{
 		GameObject hotbar = hotbarUI.Find(hb => hb.activeInHierarchy == false);
 		hotbar.gameObject.SetActive(true);
 		Image image = hotbar.transform.GetChild(0).GetChild(0).GetComponent<Image>();
 		image.sprite = space.item[0].data.image;
 		space.hotbar = hotbar;
+		space.countText = hotbar.transform.Find("CountText").GetComponent<TextMeshProUGUI>();
+		space.countText.gameObject.SetActive(false);
 	}
 
 	private void UnsetHotbar(GameObject hotbar)
