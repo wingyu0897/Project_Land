@@ -6,7 +6,8 @@ public class WoodResource : Resource
 {
 	public override void Obtain()
 	{
-		Instantiate(resource.data.prefab, inven.transform.position + new Vector3(0, 1f, 0), Quaternion.identity);
+		Item wood = PoolManager.Instance.Pop(resource.data.prefab.name) as Item;
+		wood.transform.position = inven.transform.position + new Vector3(0, 1f, 0);
 	}
 
 	public override void OnStartObtain()

@@ -9,12 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0889219086185f44989e303886e7c9d8, type: 3}
-  m_Name: SwordData
+  m_Script: {fileID: 11500000, guid: fe6dc44029c766842bbfd1864ba913ee, type: 3}
+  m_Name: PoolingList
   m_EditorClassIdentifier: 
-  itemName: Sword
-  image: {fileID: 0}
-  maxCapacity: 1
-  prefab: {fileID: 100006, guid: a45a25ec0193de54fbd3efca6e19755e, type: 3}
-  disappearTime: 60
-  attackRadius: 1.7
+  poolingList:
+  - prefab: {fileID: 917524482, guid: 5dde8da68502e1648b7b99c2f05c735e, type: 3}
+    count: 10
