@@ -16,3 +16,4 @@ MonoBehaviour:
   image: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
   maxCapacity: 10
   prefab: {fileID: 7640794926402816521, guid: 5dde8da68502e1648b7b99c2f05c735e, type: 3}
+  disappearTime: 60

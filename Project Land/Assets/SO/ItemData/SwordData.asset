@@ -16,4 +16,5 @@ MonoBehaviour:
   image: {fileID: 0}
   maxCapacity: 1
   prefab: {fileID: 100006, guid: a45a25ec0193de54fbd3efca6e19755e, type: 3}
+  disappearTime: 60
   attackRadius: 1.7
