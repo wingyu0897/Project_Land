@@ -12,7 +12,9 @@ public class WoodResource : Resource
 
 	public override void OnStartObtain()
 	{
-		movement.SetPosition((transform.position + (movement.transform.position - transform.position).normalized - movement.transform.position));
+		Vector3 pos = transform.position + (movement.transform.position - transform.position).normalized * 1.5f - movement.transform.position;
+		pos.y = 0;
+		movement.SetPosition(pos);
 		movement.SetRotate(transform.position - movement.transform.position, 1f);
 		actionData.isActive = false;
 		actionData.canChange = false;

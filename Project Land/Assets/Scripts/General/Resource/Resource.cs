@@ -14,6 +14,7 @@ public abstract class Resource : MonoBehaviour
 
 	protected virtual void Start()
 	{
+		gameObject.layer = LayerMask.NameToLayer("Resource");
 		input = Define.Instance.player.GetComponent<PlayerInput>();
 		inven = Define.Instance.player.GetComponent<PlayerInventory>();
 		actionData = Define.Instance.player.GetComponent<PlayerActionData>();
