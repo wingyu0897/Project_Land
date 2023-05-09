@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StoneResource : Resource
+public class ClickAndDropResource : Resource
 {
 	public override void Obtain()
 	{
