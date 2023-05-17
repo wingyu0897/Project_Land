@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 4238663148460903059}
   - component: {fileID: 4238663148463803059}
   - component: {fileID: 4238663148462671987}
-  - component: {fileID: 4238663148460742322}
   - component: {fileID: 4238663148460742321}
+  - component: {fileID: 4946402303088932354}
   m_Layer: 0
   m_Name: WoodResource
   m_TagString: Untagged
@@ -27,7 +27,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4238663148460742323}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.5, z: 7.38}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -83,20 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &4238663148460742322
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4238663148460742323}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65d1f4f8392eadd439c316d7b5b054ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  resource: {fileID: 917524482, guid: 5dde8da68502e1648b7b99c2f05c735e, type: 3}
-  requireMelee: {fileID: 4713603404249508137, guid: 8d3210f0ac8c3dc44bad5d97d2311e93, type: 3}
 --- !u!136 &4238663148460742321
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -111,3 +97,17 @@ CapsuleCollider:
   m_Height: 4
   m_Direction: 1
   m_Center: {x: 0, y: 2, z: 0}
+--- !u!114 &4946402303088932354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4238663148460742323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 875e7d54cb07661488624d595a6aa016, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resource: {fileID: 917524482, guid: 5dde8da68502e1648b7b99c2f05c735e, type: 3}
+  requireMelee: {fileID: 4713603404249508137, guid: 8d3210f0ac8c3dc44bad5d97d2311e93, type: 3}

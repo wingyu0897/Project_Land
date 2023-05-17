@@ -85,6 +85,7 @@ public class ResourceManager : MonoBehaviour
 
 			if (closestResource != null)
 			{
+				SelectItem.Instance.OnDeselectItem.AddListener(StopObtaining);
 				Define.Instance.player.GetComponent<PlayerMovement>().StopMovement();
 				finding = false;
 				actionData.isObtaining = true;
@@ -96,14 +97,19 @@ public class ResourceManager : MonoBehaviour
 		}
 		else
 		{
-			finding = true;
-			actionData.isObtaining = false;
-			currentResource.OnStopObtain();
-			currentResource = null;
-			OnStopObtaining?.Invoke();
-			print("Stop Obtain");
+			StopObtaining();
 		}
+	}
 
+	public void StopObtaining()
+	{
+		SelectItem.Instance.OnDeselectItem.RemoveListener(StopObtaining);
+		finding = true;
+		actionData.isObtaining = false;
+		currentResource.OnStopObtain();
+		currentResource = null;
+		OnStopObtaining?.Invoke();
+		print("Stop Obtain");
 	}
 
 #if UNITY_EDITOR

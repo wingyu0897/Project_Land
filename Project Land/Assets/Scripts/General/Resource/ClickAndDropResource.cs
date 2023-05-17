@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StoneResource : Resource
+public class ClickAndDropResource : Resource
 {
 	public override void Obtain()
 	{
 		Item item = PoolManager.Instance.Pop(resource.data.prefab.name) as Item;
-		item.transform.position = inven.transform.position + new Vector3(0, 1f, 0);
+		item.transform.position = select.transform.position + new Vector3(0, 1f, 0);
 	}
 
 	public override void OnStartObtain()

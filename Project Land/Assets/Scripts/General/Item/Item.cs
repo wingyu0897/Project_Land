@@ -14,6 +14,7 @@ public class Item : PoolableMono
 
 	protected virtual void Awake()
 	{
+		gameObject.layer = LayerMask.NameToLayer("Item");
 		coll = GetComponent<Collider>();
 		rigid = GetComponent<Rigidbody>();
 	}

@@ -13,19 +13,24 @@ public class PoolManager : MonoBehaviour
 	private void Awake()
 	{
 		Instance = this;
-	}
-
-	private void Start()
-	{
 		foreach (PoolingObject po in poolingList.poolingList)
 		{
-			CreatePool(po.prefab, po.count);
+			Transform trm;
+			try
+			{
+				trm = GameObject.Find(po.parent).transform;
+			}
+			catch
+			{
+				trm = null;
+			}
+			CreatePool(po.prefab, po.count, trm);
 		}
 	}
 
-	public void CreatePool(PoolableMono prefab, int count)
+	public void CreatePool(PoolableMono prefab, int count, Transform parent)
 	{
-		Pool<PoolableMono> pool = new Pool<PoolableMono>(prefab, transform, count);
+		Pool<PoolableMono> pool = new Pool<PoolableMono>(prefab, parent, count);
 		pools.Add(prefab.gameObject.name, pool);
 	}
 
@@ -54,8 +59,6 @@ public class PoolManager : MonoBehaviour
 		else
 		{
 			Debug.LogError($"No \"{mono.name}\" Pool!");
-			CreatePool(mono, 0);
-			Push(mono);
 		}
 	}
 }
