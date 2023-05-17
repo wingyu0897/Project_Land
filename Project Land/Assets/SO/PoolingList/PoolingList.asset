@@ -15,5 +15,13 @@ MonoBehaviour:
   poolingList:
   - prefab: {fileID: 917524482, guid: 5dde8da68502e1648b7b99c2f05c735e, type: 3}
     count: 10
+    parent: PoolManager
   - prefab: {fileID: 6106755355042108188, guid: 25e65fd9325da1d4a9054032b9f29a2c, type: 3}
     count: 10
+    parent: PoolManager
+  - prefab: {fileID: 3266049217827699052, guid: a79b7950d4058224ea8e8f8e4f62b815, type: 3}
+    count: 10
+    parent: Content
+  - prefab: {fileID: -4782644311945238900, guid: 2986d76de4a13204384df14c827027db, type: 3}
+    count: 10
+    parent: Canvas

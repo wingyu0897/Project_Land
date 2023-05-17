@@ -7,6 +7,7 @@ public class PoolingObject
 {
     public PoolableMono prefab;
     public int count;
+    public string parent;
 }
 
 [CreateAssetMenu(menuName = "SO/Pool/List")]

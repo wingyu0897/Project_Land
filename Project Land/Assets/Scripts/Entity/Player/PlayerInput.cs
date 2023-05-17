@@ -1,13 +1,13 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerInput : MonoBehaviour
 {
     private PlayerMovement movement;
 	private PlayerActionData actionData;
-	private PlayerInventory inventory;
+	private SelectItem selectManager;
+	private Inventory inventory;
 
 	public event Action OnAttackClickAction = null;
 	public event Action OnClickAction = null;
@@ -18,7 +18,8 @@ public class PlayerInput : MonoBehaviour
 	{
 		movement = GetComponent<PlayerMovement>();
 		actionData = GetComponent<PlayerActionData>();
-		inventory = GetComponent<PlayerInventory>();
+		selectManager = GetComponent<SelectItem>();
+		inventory = GetComponent<Inventory>();
 	}
 
 	private void Update()
@@ -28,6 +29,7 @@ public class PlayerInput : MonoBehaviour
 		UpdateClickInput();
 		UpdateStartAcquisitionInput();
 		UpdateItemInput();
+		UpdateInventoryInput();
 	}
 
 	private void UpdateMoveInput()
@@ -62,8 +64,7 @@ public class PlayerInput : MonoBehaviour
 	{
 		if (Input.GetKeyDown(KeyCode.Backspace))
 		{
-			if (inventory.CurrentHoldSpace == null) return;
-			inventory.DropItem(inventory.CurrentHoldSpace, false);
+			selectManager.DropSelected(1);
 		}
 	}
 
@@ -75,8 +76,16 @@ public class PlayerInput : MonoBehaviour
 			if (input.Length == 0) return;
 			if (input[0] - '0' >= 1 && input[0] - '0' <= 8)
 			{
-				inventory.SelectItem(input[0] - '0');
+				selectManager.Select(input[0] - '1');
 			}
+		}
+	}
+
+	private void UpdateInventoryInput()
+	{
+		if (Input.GetKeyDown(KeyCode.BackQuote))
+		{
+			inventory.ShowInventory(!inventory.IsShowing);
 		}
 	}
 
@@ -92,6 +101,11 @@ public class PlayerInput : MonoBehaviour
 
 	private void UpdateClickInput()
 	{
+		if (EventSystem.current.IsPointerOverGameObject())
+		{
+			return;
+		}
+
 		if (Input.GetMouseButtonDown(0))
 		{
 			if (!actionData.isAttacking && actionData.isActive)

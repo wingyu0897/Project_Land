@@ -8,7 +8,7 @@ public abstract class Resource : MonoBehaviour
     public Melee requireMelee; // 자원을 획득하는데 필요한 도구
 
     protected PlayerInput input;
-    protected PlayerInventory inven;
+    protected SelectItem select;
 	protected PlayerActionData actionData;
 	protected PlayerMovement movement;
 
@@ -16,14 +16,14 @@ public abstract class Resource : MonoBehaviour
 	{
 		gameObject.layer = LayerMask.NameToLayer("Resource");
 		input = Define.Instance.player.GetComponent<PlayerInput>();
-		inven = Define.Instance.player.GetComponent<PlayerInventory>();
+		select = Define.Instance.player.GetComponent<SelectItem>();
 		actionData = Define.Instance.player.GetComponent<PlayerActionData>();
 		movement = Define.Instance.player.GetComponent<PlayerMovement>();
 	}
 
 	public virtual bool Obtainable()
 	{
-        return inven.CurrentHoldSpace?.GetItemType() == requireMelee.GetType();
+        return select.CurrentSelected?.Item?.GetType() == requireMelee.GetType();
 	}
 
 	public abstract void OnStartObtain();

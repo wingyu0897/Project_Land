@@ -13,8 +13,8 @@ public class PlayerMovement : MonoBehaviour
 	[SerializeField] private float gravity = -9.81f;
 
 	private float verticalVelocity;
-	private Vector3 moveVelocity;
-	private Vector3 inputVelocity;
+	private Vector3 moveVelocity = Vector3.zero;
+	private Vector3 inputVelocity = Vector3.zero;
 
 	private void Awake()
 	{
