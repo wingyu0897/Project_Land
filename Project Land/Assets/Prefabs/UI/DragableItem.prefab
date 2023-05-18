@@ -86,11 +86,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 3544055831583855921}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ba0bee3c3aef554c82526117502a21f, type: 3}
+  m_Script: {fileID: 11500000, guid: cd8b29cfc98bfe549ad217b381f46e73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 0}
   countText: {fileID: 0}
+  itemList: []
   parentSlot: {fileID: 0}
 --- !u!1 &3544055831795340857
 GameObject:

@@ -83,7 +83,7 @@ public class PlayerInput : MonoBehaviour
 
 	private void UpdateInventoryInput()
 	{
-		if (Input.GetKeyDown(KeyCode.Tab))
+		if (Input.GetKeyDown(KeyCode.BackQuote))
 		{
 			inventory.ShowInventory(!inventory.IsShowing);
 		}

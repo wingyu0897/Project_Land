@@ -64,7 +64,7 @@ public class SelectItem : MonoBehaviour
 		for(int i = 0; i < count; i++)
 		{
 			currentSelected.RemoveItem();
-			if (currentSelected.itemList.Count == 0)
+			if (currentSelected.ItemCount == 0)
 			{
 				inventory.RemoveItem(currentSelected);
 				Deselect();

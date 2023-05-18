@@ -8,6 +8,6 @@ public class ItemDataSO : ScriptableObject
 	public string itemName;
 	public Sprite image;
 	public int maxCapacity = 1;
-	public GameObject prefab;
+	public Item prefab;
 	public float disappearTime = 60f;
 }

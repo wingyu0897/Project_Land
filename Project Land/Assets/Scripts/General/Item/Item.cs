@@ -75,7 +75,6 @@ public class Item : PoolableMono
 		{
 			if (Time.time - dropTime >= data.disappearTime)
 			{
-				print("disappear");
 				PoolManager.Instance.Push(this);
 			}
 		}

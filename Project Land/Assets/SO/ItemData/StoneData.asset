@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Stone
   image: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  maxCapacity: 2
-  prefab: {fileID: 8413476334618267384, guid: 25e65fd9325da1d4a9054032b9f29a2c, type: 3}
+  maxCapacity: 10
+  prefab: {fileID: 6106755355042108188, guid: 25e65fd9325da1d4a9054032b9f29a2c, type: 3}
   disappearTime: 60

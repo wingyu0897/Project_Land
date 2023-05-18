@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -10,15 +9,18 @@ public class DragableItem : PoolableMono, IBeginDragHandler, IDragHandler, IEndD
 	public Image image;
 	public TextMeshProUGUI countText;
 
-	public List<Item> itemList = new List<Item>();
+	private Item item;
+	private int itemCount;
+	public int ItemCount => itemCount;
+
 	public Item Item
 	{
 		get
 		{
-			if (itemList.Count == 0)
+			if (itemCount == 0)
 				return null;
 			else
-				return itemList[0];
+				return item;
 		}
 	}
 
@@ -31,23 +33,20 @@ public class DragableItem : PoolableMono, IBeginDragHandler, IDragHandler, IEndD
 		countText = transform.Find("CountText").GetComponent<TextMeshProUGUI>();
 	}
 
-	public void SetImage(Sprite sprite)
+	public override void Init()
 	{
-		image.sprite = sprite;
+		image.sprite = null;
+		countText.text = "0";
+		countText.enabled = false;
 	}
 
-	public void SetCountText()
+	public void SetCountText() // 개수 텍스트 설정 // 개수가 1 이하면 텍스트를 비활성화한다.
 	{
-		int count = itemList.Count;
-		countText.text = count.ToString();
-
-		if (count <= 1)
-			countText.enabled = false;
-		else
-			countText.enabled = true;
+		countText.text = itemCount.ToString();
+		countText.enabled = itemCount > 1;
 	}
 
-	public void OnBeginDrag(PointerEventData eventData)
+	public void OnBeginDrag(PointerEventData eventData) // 드래그를 시작했을 때
 	{
 		parentSlot = transform.parent;
 		transform.SetParent(transform.root.root.root);
@@ -55,12 +54,12 @@ public class DragableItem : PoolableMono, IBeginDragHandler, IDragHandler, IEndD
 		image.raycastTarget = false;
 	}
 
-	public void OnDrag(PointerEventData eventData)
+	public void OnDrag(PointerEventData eventData) // 드래그 중
 	{
 		transform.position = Input.mousePosition;
 	}
 
-	public void OnEndDrag(PointerEventData eventData)
+	public void OnEndDrag(PointerEventData eventData) // 드래그를 끝냈을 때
 	{
 		transform.SetParent(parentSlot.transform);
 		image.raycastTarget = true;
@@ -68,12 +67,47 @@ public class DragableItem : PoolableMono, IBeginDragHandler, IDragHandler, IEndD
 
 	public void AddItem(Item input)
 	{
-		itemList.Add(input);
+		itemCount++;
 
-		if (itemList.Count <= 1)
+		if (itemCount <= 1)
+		{
+			item = input;
 			countText.enabled = false;
+			image.sprite = input.data.image;
+		}
 		else
-			countText.enabled = true;
+		{
+			PoolManager.Instance.Push(input);
+			SetCountText();
+		}
+	}
+
+	public void RemoveItem()
+	{
+		if (itemCount == 0) return;
+
+		Item drop;
+
+		if (itemCount > 1)
+		{
+			drop = PoolManager.Instance.Pop(item.data.prefab.gameObject.name) as Item;
+		}
+		else
+		{
+			drop = item;
+		}
+
+		drop.OnDrop();
+		itemCount--;
+		SetCountText();
+
+		if (itemCount == 0)
+		{
+			item = null;
+			InventorySlot oldSlot = parentSlot?.parent.GetComponent<InventorySlot>();
+			oldSlot.RemoveSlot();
+			PoolManager.Instance.Push(this);
+		}
 	}
 
 	public void ChangeParent(Transform parent)
@@ -86,38 +120,11 @@ public class DragableItem : PoolableMono, IBeginDragHandler, IDragHandler, IEndD
 			PoolManager.Instance.Push(oldSlot);
 		}
 
-		if (SelectItem.Instance.CurrentSelected == itemList[0])
+		if (SelectItem.Instance.CurrentSelected == item)
 		{
 			SelectItem.Instance.Select(this);
 		}
 
 		parentSlot = parent;
-	}
-
-	public void RemoveItem()
-	{
-		if (itemList.Count == 0) return;
-
-		Item drop = itemList[itemList.Count - 1];
-		drop.OnDrop();
-		itemList.Remove(drop);
-		SetCountText();
-
-		if (itemList.Count == 0)
-		{
-			InventorySlot oldSlot = parentSlot?.parent.GetComponent<InventorySlot>();
-			oldSlot.dragItem = null;
-			oldSlot.gameObject.SetActive(false);
-			if (parentSlot?.parent.parent.name != "HotSlots")
-				PoolManager.Instance.Push(oldSlot);
-			PoolManager.Instance.Push(this);
-		}
-	}
-
-	public override void Init()
-	{
-		image.sprite = null;
-		countText.text = "0";
-		countText.enabled = false;
 	}
 }

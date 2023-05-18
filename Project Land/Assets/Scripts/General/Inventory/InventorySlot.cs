@@ -1,13 +1,14 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class InventorySlot : PoolableMono, IDropHandler, IPointerClickHandler
+public class InventorySlot : PoolableMono, IDropHandler
 {
 	public DragableItem dragItem = null;
+	public bool isHot = false;
 
 	public override void Init()
 	{
-		transform.SetParent(GameObject.Find("HotSlots").transform);
+
 	}
 
 	public void OnDrop(PointerEventData eventData)
@@ -25,8 +26,11 @@ public class InventorySlot : PoolableMono, IDropHandler, IPointerClickHandler
 		}
 	}
 
-	public void OnPointerClick(PointerEventData eventData)
+	public void RemoveSlot()
 	{
-		Debug.Log("Click");
+		gameObject.SetActive(false);
+		dragItem = null;
+		if (!isHot)
+			PoolManager.Instance.Push(this);
 	}
 }
