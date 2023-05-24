@@ -4,26 +4,21 @@ using UnityEngine;
 
 public class ObtainableMeleeItem : MeleeItem
 {
-	protected ResourceManager resManager;
-
 	protected override void Start()
 	{
 		base.Start();
-		resManager = Define.Instance.player.GetComponent<ResourceManager>();
 	}
 
 	public override void OnDeselect()
 	{
 		base.OnDeselect();
 		input.OnClickAction -= ObtainStartHandle;
-		resManager.OnStartObtaining -= StartObtain;
 	}
 
 	public override void OnSelect()
 	{
 		base.OnSelect();
 		input.OnClickAction += ObtainStartHandle;
-		resManager.OnStartObtaining += StartObtain;
 	}
 
 	public virtual void ObtainStartHandle()
@@ -47,14 +42,12 @@ public class ObtainableMeleeItem : MeleeItem
 
 	public virtual void ObtainHandle()
 	{
-		resManager.currentResource?.Obtain();
 	}
 
 	public virtual void StartObtain()
 	{
 		actionData.isActive = false;
 		actionData.canChange = false;
-		resManager.OnStopObtaining += StopObtain;
 	}
 
 	public virtual void StopObtain()
@@ -63,7 +56,6 @@ public class ObtainableMeleeItem : MeleeItem
 		animator.OnEvent -= ObtainHandle;
 		animator.OnEnd -= ObtainEndHandle;
 		animator.Animator.applyRootMotion = false;
-		resManager.OnStopObtaining -= StopObtain;
 	}
 
 	public virtual void ObtainAnimation()

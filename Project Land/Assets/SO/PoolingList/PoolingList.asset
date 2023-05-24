@@ -25,3 +25,9 @@ MonoBehaviour:
   - prefab: {fileID: -4782644311945238900, guid: 2986d76de4a13204384df14c827027db, type: 3}
     count: 10
     parent: Canvas
+  - prefab: {fileID: 4946402303088932354, guid: 933e807ed0a567e4495325ebaf450a21, type: 3}
+    count: 0
+    parent: PoolManager
+  - prefab: {fileID: 2708006459733847540, guid: 36d5f209ad1d99b4686b183f2a3025f5, type: 3}
+    count: 0
+    parent: PoolManager

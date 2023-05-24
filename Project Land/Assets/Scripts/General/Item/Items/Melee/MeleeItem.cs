@@ -70,6 +70,6 @@ public class MeleeItem : Item
 
 	public virtual void AttackHandle()
 	{
-		damageCaster.SphereCast(meleeData.attackRadius);
+		damageCaster.SphereCast(meleeData.attackRadius, meleeData.damage);
 	}
 }

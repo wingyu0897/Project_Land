@@ -2,10 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Resource : MonoBehaviour
+public abstract class Resource : PoolableMono
 {
     [SerializeField] protected Item resource; // 반환할 자원
-    public MeleeItem requireMelee; // 자원을 획득하는데 필요한 도구
 
     protected PlayerInput input;
     protected SelectItem select;
@@ -21,12 +20,6 @@ public abstract class Resource : MonoBehaviour
 		movement = Define.Instance.player.GetComponent<PlayerMovement>();
 	}
 
-	public virtual bool Obtainable()
-	{
-        return select.CurrentSelected?.Item?.GetType() == requireMelee.GetType();
-	}
-
-	public abstract void OnStartObtain();
-	public abstract void OnStopObtain();
+	public abstract bool Obtainable();
 	public abstract void Obtain();
 }

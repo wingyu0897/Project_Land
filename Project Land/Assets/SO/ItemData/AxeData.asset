@@ -18,3 +18,4 @@ MonoBehaviour:
   prefab: {fileID: 4713603404249508137, guid: 8d3210f0ac8c3dc44bad5d97d2311e93, type: 3}
   disappearTime: 60
   attackRadius: 1.4
+  damage: 10
