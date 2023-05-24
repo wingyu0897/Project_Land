@@ -68,6 +68,7 @@ public class PlayerInput : MonoBehaviour
 		}
 	}
 
+	public Item item;
 	private void UpdateHotbarInput()
 	{
 		if (Input.anyKeyDown)
@@ -78,6 +79,11 @@ public class PlayerInput : MonoBehaviour
 			{
 				selectManager.Select(input[0] - '1');
 			}
+		}
+
+		if (Input.GetKeyDown(KeyCode.M))
+		{
+			inventory.FindItem(item);
 		}
 	}
 

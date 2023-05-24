@@ -61,7 +61,25 @@ public class Inventory : MonoBehaviour
 
 	public void RemoveItem(DragableItem item)
 	{
+		if (SelectItem.Instance?.CurrentSelected == item)
+		{
+			SelectItem.Instance.Deselect();
+		}
+
 		items.Remove(item);
+	}
+
+	public DragableItem FindItem(Item item)
+	{
+		try
+		{
+			DragableItem ret = items.Find(x => x.Item.GetType() == item.GetType());
+			return ret;
+		}
+		catch
+		{
+			return null;
+		}
 	}
 
 	/// <summary>

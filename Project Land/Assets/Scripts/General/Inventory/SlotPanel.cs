@@ -23,8 +23,7 @@ public class SlotPanel : MonoBehaviour, IDropHandler
 			{
 				InventorySlot oldSlot = dragItem.parentSlot?.parent.GetComponent<InventorySlot>();
 				oldSlot.dragItem = null;
-
-				if (SelectItem.Instance.CurrentSelected == dragItem.Item)
+				if (SelectItem.Instance.CurrentSelected == dragItem)
 				{
 					SelectItem.Instance.Select(dragItem);
 				}

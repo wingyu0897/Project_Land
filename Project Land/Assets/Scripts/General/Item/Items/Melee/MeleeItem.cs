@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Melee : Item
+public class MeleeItem : Item
 {
 	public MeleeItemDataSO meleeData;
 

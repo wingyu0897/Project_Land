@@ -112,6 +112,8 @@ public class DragableItem : PoolableMono, IBeginDragHandler, IDragHandler, IEndD
 
 	public void ChangeParent(Transform parent)
 	{
+		if (parentSlot == parent) return;
+
 		InventorySlot oldSlot = parentSlot?.parent.GetComponent<InventorySlot>();
 		oldSlot.dragItem = null;
 

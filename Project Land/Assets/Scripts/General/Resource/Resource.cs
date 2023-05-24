@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class Resource : MonoBehaviour
 {
     [SerializeField] protected Item resource; // 반환할 자원
-    public Melee requireMelee; // 자원을 획득하는데 필요한 도구
+    public MeleeItem requireMelee; // 자원을 획득하는데 필요한 도구
 
     protected PlayerInput input;
     protected SelectItem select;

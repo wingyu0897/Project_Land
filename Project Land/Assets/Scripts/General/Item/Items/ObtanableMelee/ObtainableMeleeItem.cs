@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObtainableMelee : Melee
+public class ObtainableMeleeItem : MeleeItem
 {
 	protected ResourceManager resManager;
 

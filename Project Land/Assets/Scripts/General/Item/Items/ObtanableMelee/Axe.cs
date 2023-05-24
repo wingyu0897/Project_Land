@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Axe : ObtainableMelee
+public class Axe : ObtainableMeleeItem
 {
 	public override void ObtainStartHandle()
 	{

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pickaxe : ObtainableMelee
+public class Pickaxe : ObtainableMeleeItem
 {
 	public override void ObtainStartHandle()
 	{
