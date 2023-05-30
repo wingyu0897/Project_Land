@@ -28,7 +28,8 @@ public class InventorySlot : PoolableMono, IDropHandler
 
 	public void RemoveSlot()
 	{
-		gameObject.SetActive(false);
+		if (!isHot || !Inventory.isShowing)
+			gameObject.SetActive(false);
 		dragItem = null;
 		if (!isHot)
 			PoolManager.Instance.Push(this);

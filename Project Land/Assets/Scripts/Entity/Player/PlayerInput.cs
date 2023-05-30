@@ -11,7 +11,7 @@ public class PlayerInput : MonoBehaviour
 
 	public event Action OnAttackClickAction = null;
 	public event Action OnClickAction = null;
-	public event Action OnStartAcquisitionAction = null;
+	public event Action OnInteractAction = null;
 	public event Action OnRollingAction = null;
 
 	private void Awake()
@@ -27,7 +27,7 @@ public class PlayerInput : MonoBehaviour
 		UpdateMoveInput();
 		UpdateRollingInput();
 		UpdateClickInput();
-		UpdateStartAcquisitionInput();
+		UpdateInteractInput();
 		UpdateItemInput();
 		UpdateInventoryInput();
 	}
@@ -44,7 +44,7 @@ public class PlayerInput : MonoBehaviour
 
 	private void UpdateRollingInput()
 	{
-		if (actionData.isRolling || actionData.isObtaining) return;
+		if (actionData.isRolling || actionData.isInteracting) return;
 
 		if (Input.GetKeyDown(KeyCode.LeftShift))
 		{
@@ -68,7 +68,6 @@ public class PlayerInput : MonoBehaviour
 		}
 	}
 
-	public Item item;
 	private void UpdateHotbarInput()
 	{
 		if (Input.anyKeyDown)
@@ -80,11 +79,6 @@ public class PlayerInput : MonoBehaviour
 				selectManager.Select(input[0] - '1');
 			}
 		}
-
-		if (Input.GetKeyDown(KeyCode.M))
-		{
-			inventory.FindItem(item);
-		}
 	}
 
 	private void UpdateInventoryInput()
@@ -95,13 +89,13 @@ public class PlayerInput : MonoBehaviour
 		}
 	}
 
-	private void UpdateStartAcquisitionInput()
+	private void UpdateInteractInput()
 	{
 		if (actionData.isRolling) return;
 
-		if (Input.GetKeyDown(KeyCode.E))
+		if (Input.GetKey(KeyCode.F))
 		{
-			OnStartAcquisitionAction?.Invoke();
+			OnInteractAction?.Invoke();
 		}
 	}
 

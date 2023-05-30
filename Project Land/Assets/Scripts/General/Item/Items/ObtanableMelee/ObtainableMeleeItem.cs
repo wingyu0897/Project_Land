@@ -23,7 +23,7 @@ public class ObtainableMeleeItem : MeleeItem
 
 	public virtual void ObtainStartHandle()
 	{
-		if (actionData.isObtaining == false) return;
+		if (actionData.isInteracting == false) return;
 		if (animator.Animator.applyRootMotion == true) return;
 
 		animator.Animator.applyRootMotion = true;

@@ -14,7 +14,8 @@ public class Inventory : MonoBehaviour
 	private List<InventorySlot> hotSlots = new List<InventorySlot>();
 	public List<InventorySlot> HotSlots => hotSlots;
 
-	private bool isShowing = false;
+	[HideInInspector]
+	public static bool isShowing = false;
 	public bool IsShowing => isShowing;
 
 	private void Start()

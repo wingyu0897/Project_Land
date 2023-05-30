@@ -29,7 +29,7 @@ public class ClickAndDropResource : Resource, IDamageable
 		for (int i = 0; i < 3; ++i)
 		{
 			Item item = PoolManager.Instance.Pop(resource.data.prefab.name) as Item;
-			item.transform.position = select.transform.position + new Vector3(0, 1f * (i + 1), 0);
+			item.transform.position = transform.position + new Vector3(0, 1f * (i + 1), 0);
 		}
 	}
 

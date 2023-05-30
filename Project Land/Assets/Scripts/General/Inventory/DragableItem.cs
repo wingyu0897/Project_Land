@@ -89,13 +89,9 @@ public class DragableItem : PoolableMono, IBeginDragHandler, IDragHandler, IEndD
 		Item drop;
 
 		if (itemCount > 1)
-		{
 			drop = PoolManager.Instance.Pop(item.data.prefab.gameObject.name) as Item;
-		}
 		else
-		{
 			drop = item;
-		}
 
 		drop.OnDrop();
 		itemCount--;
