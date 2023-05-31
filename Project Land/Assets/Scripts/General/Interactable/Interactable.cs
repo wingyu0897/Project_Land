@@ -11,6 +11,6 @@ public abstract class Interactable : MonoBehaviour
 		actionData = Define.Instance.player.GetComponent<PlayerActionData>();
 	}
 
-	public abstract float InteractTime { get; }
+	public abstract string Name { get; set; }
 	public abstract void OnInteract();
 }

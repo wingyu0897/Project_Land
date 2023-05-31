@@ -62,8 +62,7 @@ public class InteractManager : MonoBehaviour
 			}
 			else
 			{
-				//test¿ë ÀÓ½Ã
-				infoText.text = closestInteract.gameObject.name;
+				infoText.text = closestInteract.Name;
 				keyUI.gameObject.SetActive(true);
 			}
 		}
