@@ -27,12 +27,6 @@ public class DragableItem : PoolableMono, IBeginDragHandler, IDragHandler, IEndD
 	[HideInInspector]
 	public Transform parentSlot;
 
-	private void Awake()
-	{
-		image = GetComponent<Image>();
-		countText = transform.Find("CountText").GetComponent<TextMeshProUGUI>();
-	}
-
 	public override void Init()
 	{
 		image.sprite = null;
@@ -82,7 +76,7 @@ public class DragableItem : PoolableMono, IBeginDragHandler, IDragHandler, IEndD
 		}
 	}
 
-	public void RemoveItem()
+	public void DropItem()
 	{
 		if (itemCount == 0) return;
 
@@ -94,6 +88,22 @@ public class DragableItem : PoolableMono, IBeginDragHandler, IDragHandler, IEndD
 			drop = item;
 
 		drop.OnDrop();
+		itemCount--;
+		SetCountText();
+
+		if (itemCount == 0)
+		{
+			item = null;
+			InventorySlot oldSlot = parentSlot?.parent.GetComponent<InventorySlot>();
+			oldSlot.RemoveSlot();
+			PoolManager.Instance.Push(this);
+		}
+	}
+
+	public void RemoveItem()
+	{
+		if (itemCount == 0) return;
+
 		itemCount--;
 		SetCountText();
 

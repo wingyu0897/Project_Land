@@ -26,9 +26,9 @@ public class InteractManager : MonoBehaviour
 
 	private void Update()
 	{
+		ResourceFinding();
 		if (actionData.isInteracting) return;
 		InteractInput();
-		ResourceFinding();
 	}
 
 	private void LateUpdate()
@@ -53,17 +53,24 @@ public class InteractManager : MonoBehaviour
 
 	private void ResourceFinding()
 	{
-		if (closestInteract != null && !actionData.isInteracting)
+		if (closestInteract != null)
 		{
-			keyUI.gameObject.SetActive(false);
 			if (Vector3.Distance(closestInteract.gameObject.transform.position, transform.position) > radius)
 			{
+				if (actionData.isInteracting)
+				{
+					latestInteract.StopInteract();
+				}
+				keyUI.gameObject.SetActive(false);
 				closestInteract = null;
 			}
 			else
 			{
-				infoText.text = closestInteract.Name;
-				keyUI.gameObject.SetActive(true);
+				if (!actionData.isInteracting)
+				{
+					infoText.text = closestInteract.Name;
+					keyUI.gameObject.SetActive(true);
+				}
 			}
 		}
 

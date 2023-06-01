@@ -344,5 +344,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e2f2b33c8166744ea998b995ad46817, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  crafting: {fileID: 0}
   itemImage: {fileID: 7531695301505669126}
   itemText: {fileID: 7531695301548961992}
+  btn: {fileID: 7531695301973766465}

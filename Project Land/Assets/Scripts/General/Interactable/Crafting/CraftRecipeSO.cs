@@ -13,5 +13,5 @@ public class RecipeRequire
 public class CraftRecipeSO : ScriptableObject
 {
     public List<RecipeRequire> requires;
-    public ItemDataSO item;
+    public ItemDataSO resultItem;
 }

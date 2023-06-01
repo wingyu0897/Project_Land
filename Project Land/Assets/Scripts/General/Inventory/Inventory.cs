@@ -60,14 +60,21 @@ public class Inventory : MonoBehaviour
 		dragableItem.parentSlot = dragableItem.transform.parent;
 	}
 
-	public void RemoveItem(DragableItem item)
+	public void RemoveItem(DragableItem item, int count = 1)
 	{
-		if (SelectItem.Instance?.CurrentSelected == item)
+		if (item.ItemCount - count <= 0)
 		{
-			SelectItem.Instance.Deselect();
+			if (SelectItem.Instance?.CurrentSelected == item)
+				SelectItem.Instance.Deselect();
 		}
 
-		items.Remove(item);
+		for (int i = 0; i < count; i++)
+		{
+			item.RemoveItem();
+		}
+
+		if (item.ItemCount <= 0)
+			items.Remove(item);
 	}
 
 	public DragableItem FindItem(Item item)
@@ -81,6 +88,26 @@ public class Inventory : MonoBehaviour
 		{
 			return null;
 		}
+	}
+
+	public bool FindItem(CraftRecipeSO recipe)
+	{
+		bool result = true;
+
+		foreach (RecipeRequire req in recipe.requires)
+		{
+			DragableItem item = FindItem(req.item.prefab);
+			if (item != null)
+			{
+				if (item.ItemCount >= req.count)
+				{
+					continue;
+				}
+			}
+			result = false;
+		}
+
+		return result;
 	}
 
 	/// <summary>
