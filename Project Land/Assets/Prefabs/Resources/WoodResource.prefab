@@ -110,4 +110,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resource: {fileID: 917524482, guid: 5dde8da68502e1648b7b99c2f05c735e, type: 3}
-  requireMelee: {fileID: 4713603404249508137, guid: 8d3210f0ac8c3dc44bad5d97d2311e93, type: 3}
+  dedicatedTool: {fileID: 4713603404249508137, guid: 8d3210f0ac8c3dc44bad5d97d2311e93, type: 3}
+  maxHealth: 10

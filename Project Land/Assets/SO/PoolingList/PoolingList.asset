@@ -21,7 +21,16 @@ MonoBehaviour:
     parent: PoolManager
   - prefab: {fileID: 3266049217827699052, guid: a79b7950d4058224ea8e8f8e4f62b815, type: 3}
     count: 10
-    parent: Content
+    parent: InnerSlot
   - prefab: {fileID: -4782644311945238900, guid: 2986d76de4a13204384df14c827027db, type: 3}
     count: 10
     parent: Canvas
+  - prefab: {fileID: 4946402303088932354, guid: 933e807ed0a567e4495325ebaf450a21, type: 3}
+    count: 0
+    parent: PoolManager
+  - prefab: {fileID: 2718280503433999230, guid: 9a4b417f4d5def343841b4c03f548a15, type: 3}
+    count: 0
+    parent: PoolManager
+  - prefab: {fileID: 7531695301973766466, guid: cfa30332e80cba9418af25c41f821166, type: 3}
+    count: 1
+    parent: PoolManager

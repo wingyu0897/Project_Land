@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: WoodData
   m_EditorClassIdentifier: 
   itemName: Wood
-  image: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  image: {fileID: 21300000, guid: aec6552a063b75c499b6ea2a973d6aee, type: 3}
   maxCapacity: 10
-  prefab: {fileID: 7640794926402816521, guid: 5dde8da68502e1648b7b99c2f05c735e, type: 3}
+  prefab: {fileID: 917524482, guid: 5dde8da68502e1648b7b99c2f05c735e, type: 3}
   disappearTime: 60

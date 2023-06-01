@@ -6,4 +6,5 @@ using UnityEngine;
 public class MeleeItemDataSO : ItemDataSO
 {
 	public float attackRadius;
+	public int damage;
 }

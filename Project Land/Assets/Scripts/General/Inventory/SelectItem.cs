@@ -26,14 +26,7 @@ public class SelectItem : MonoBehaviour
 		if (inventory.HotSlots[number].dragItem != null)
 		{
 			DragableItem nextItem = inventory.HotSlots[number].dragItem;
-			if (currentSelected != null && nextItem == currentSelected)
-			{
-				Deselect();
-				return;
-			}
-			currentSelected?.Item.OnDeselect();
-			currentSelected = nextItem;
-			currentSelected?.Item.OnSelect();
+			Select(nextItem);
 		}
 	}
 
@@ -44,7 +37,8 @@ public class SelectItem : MonoBehaviour
 			Deselect();
 			return;
 		}
-		currentSelected?.Item.OnDeselect();
+
+		Deselect();
 		currentSelected = nextItem;
 		currentSelected?.Item.OnSelect();
 	}
@@ -63,8 +57,8 @@ public class SelectItem : MonoBehaviour
 
 		for(int i = 0; i < count; i++)
 		{
-			currentSelected.RemoveItem();
-			if (currentSelected.itemList.Count == 0)
+			currentSelected.DropItem();
+			if (currentSelected.ItemCount == 0)
 			{
 				inventory.RemoveItem(currentSelected);
 				Deselect();

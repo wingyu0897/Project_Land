@@ -1,28 +1,52 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class ClickAndDropResource : Resource
+public class ClickAndDropResource : Resource, IDamageable
 {
+	[SerializeField] private Item dedicatedTool;
+	[SerializeField] private int maxHealth;
+	private int health;
+
+	public void Awake()
+	{
+		Init();
+	}
+
+	public override void Init()
+	{
+		health = maxHealth;
+	}
+
+	public override bool Obtainable()
+	{
+		if (health <= 0)
+			return false;
+
+		return true;
+	}
+
 	public override void Obtain()
 	{
-		Item item = PoolManager.Instance.Pop(resource.data.prefab.name) as Item;
-		item.transform.position = select.transform.position + new Vector3(0, 1f, 0);
+		for (int i = 0; i < 3; ++i)
+		{
+			Item item = PoolManager.Instance.Pop(resource.data.prefab.name) as Item;
+			item.transform.position = transform.position + new Vector3(0, 1f * (i + 1), 0);
+		}
 	}
 
-	public override void OnStartObtain()
+	public void OnDamaged(int damage)
 	{
-		Vector3 pos = transform.position + (movement.transform.position - transform.position).normalized * 1.5f - movement.transform.position;
-		pos.y = 0;
-		movement.SetPosition(pos);
-		movement.SetRotate(transform.position - movement.transform.position, 1f);
-		actionData.isActive = false;
-		actionData.canChange = false;
-	}
+		if (!Obtainable()) return;
 
-	public override void OnStopObtain()
-	{
-		actionData.isActive = true;
-		actionData.canChange = true;
+		if (SelectItem.Instance.CurrentSelected.Item.GetType() != dedicatedTool.GetType())
+			damage /= 10;
+
+		health -= damage;
+		health = Mathf.Clamp(health, 0, maxHealth);
+
+		if (health == 0)
+		{
+			Obtain();
+			PoolManager.Instance.Push(this);
+		}
 	}
 }
