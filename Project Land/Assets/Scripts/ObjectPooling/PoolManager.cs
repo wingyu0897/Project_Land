@@ -53,7 +53,6 @@ public class PoolManager : MonoBehaviour
 	{
 		if (pools.ContainsKey(mono.name))
 		{
-			mono.transform.SetParent(transform);
 			pools[mono.name].Push(mono);
 		}
 		else

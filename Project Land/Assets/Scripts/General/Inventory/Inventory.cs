@@ -32,6 +32,8 @@ public class Inventory : MonoBehaviour
 
 	public void AddItem(Item item)
 	{
+		NotificationManager.Instance.Notification(item.data.image, "Item Obtained", $"You obtained {item.data.itemName}.");
+		
 		item.OnPickUp();
 
 		foreach (DragableItem sl in items)
@@ -117,7 +119,6 @@ public class Inventory : MonoBehaviour
 	public void ShowInventory(bool show)
 	{
 		isShowing = show;
-
 		slotsParent.gameObject.SetActive(show);
 
 		foreach (InventorySlot inv in hotSlots)

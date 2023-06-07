@@ -27,7 +27,11 @@ public class InteractManager : MonoBehaviour
 	private void Update()
 	{
 		ResourceFinding();
-		if (actionData.isInteracting) return;
+		if (actionData.isInteracting || actionData.isDead)
+		{
+			keyUI.gameObject.SetActive(false);
+			return;
+		}
 		InteractInput();
 	}
 
