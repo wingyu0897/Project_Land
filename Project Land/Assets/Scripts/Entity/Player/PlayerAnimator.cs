@@ -13,6 +13,8 @@ public class PlayerAnimator : MonoBehaviour
 	private readonly int rollHash = Animator.StringToHash("roll");
 	private readonly int swordAttackHash = Animator.StringToHash("sword_attack");
 	private readonly int attackHash = Animator.StringToHash("attack");
+	private readonly int deadHash = Animator.StringToHash("dead");
+	private readonly int isdeadHash = Animator.StringToHash("is_dead");
 
 	public event Action OnEvent = null;
 	public event Action OnEnd = null;
@@ -20,6 +22,11 @@ public class PlayerAnimator : MonoBehaviour
 	private void Awake()
 	{
 		animator = GetComponent<Animator>();
+	}
+
+	public void Init()
+	{
+		SetDeadBool(false);
 	}
 
 	public void ResetTransform()
@@ -69,5 +76,19 @@ public class PlayerAnimator : MonoBehaviour
 	public void SetRollTrigger()
 	{
 		animator.SetTrigger(rollHash);
+	}
+
+	public void SetDeadBool(bool dead)
+	{
+		animator.applyRootMotion = dead;
+		animator.SetBool(isdeadHash, dead);
+	}
+
+	public void SetDeadTrigger(bool dead)
+	{
+		if (dead)
+			animator.SetTrigger(deadHash);
+		else
+			animator.ResetTrigger(deadHash);
 	}
 }

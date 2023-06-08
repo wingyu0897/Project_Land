@@ -24,6 +24,8 @@ public class PlayerInput : MonoBehaviour
 
 	private void Update()
 	{
+		if (actionData.isDead) return;
+
 		UpdateMoveInput();
 		UpdateRollingInput();
 		UpdateClickInput();
