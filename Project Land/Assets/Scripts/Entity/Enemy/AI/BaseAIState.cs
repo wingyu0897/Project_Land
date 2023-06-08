@@ -5,11 +5,13 @@ using UnityEngine;
 public abstract class BaseAIState : MonoBehaviour
 {
     protected EnemyBrain brain;
+	protected EnemyActionData actionData;
 	public List<AITransition> transitions;
 
 	private void Awake()
 	{
 		brain = transform.parent.parent.GetComponent<EnemyBrain>();
+		actionData = transform.parent.GetComponent<EnemyActionData>();
 		GetComponents(transitions);
 	}
 

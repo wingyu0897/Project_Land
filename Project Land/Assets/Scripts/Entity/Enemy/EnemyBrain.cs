@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class EnemyBrain : PoolableMono
 {
@@ -13,6 +14,9 @@ public class EnemyBrain : PoolableMono
 	[SerializeField] private BaseAIState currentState;
 
 	public Transform target;
+
+	[Header("Event")]
+	public UnityEvent OnDeadEvent = null;
 
 	private void Awake()
 	{
@@ -31,7 +35,7 @@ public class EnemyBrain : PoolableMono
 		currentState.UpdateState();
 		foreach (AITransition tr in currentState.transitions)
 		{
-			if (tr.Change())
+			if (tr.CanChange())
 			{
 				ChangeState(tr.nextState);
 				break;
@@ -44,6 +48,11 @@ public class EnemyBrain : PoolableMono
 		currentState?.OnExitState();
 		currentState = state;
 		currentState?.OnEnterState();
+	}
+
+	public void OnDead()
+	{
+		OnDeadEvent?.Invoke();
 	}
 
 	public override void Init()

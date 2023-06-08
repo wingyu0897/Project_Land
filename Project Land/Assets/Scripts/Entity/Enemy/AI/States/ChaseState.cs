@@ -16,6 +16,8 @@ public class ChaseState : BaseAIState
 
 	public override void UpdateState()
 	{
-		brain.movement.Move(brain.target.position - transform.position);
+		Vector3 dir = brain.target.position - transform.position;
+		dir.y = 0;
+		brain.movement.Move(dir);
 	}
 }

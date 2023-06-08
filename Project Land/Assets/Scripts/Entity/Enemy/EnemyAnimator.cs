@@ -9,6 +9,7 @@ public class EnemyAnimator : MonoBehaviour
 	public Animator Animator => animator;
 
 	private readonly int speedHash = Animator.StringToHash("speed");
+	private readonly int attackHash = Animator.StringToHash("attack");
 
 	public event Action OnEvent = null;
 	public event Action OnEnd = null;
@@ -32,11 +33,22 @@ public class EnemyAnimator : MonoBehaviour
 	public void OnAnimationEnd()
 	{
 		OnEnd?.Invoke();
-		ResetTransform();
 	}
 
 	public void SetSpeed(float speed)
 	{
 		animator.SetFloat(speedHash, speed);
+	}
+
+	public void SetAttackTrigger(bool attack)
+	{
+		if (attack)
+		{
+			animator.SetTrigger(attackHash);
+		}
+		else
+		{
+			animator.ResetTrigger(attackHash);
+		}
 	}
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DamageCaster : MonoBehaviour
 {
-    public void SphereCast(float radius, int damage = 0)
+    public void SphereCastAll(float radius, int damage = 0)
 	{
 		RaycastHit[] hits = Physics.SphereCastAll(transform.position + (-transform.forward * 1), radius, transform.forward, 1f);
 

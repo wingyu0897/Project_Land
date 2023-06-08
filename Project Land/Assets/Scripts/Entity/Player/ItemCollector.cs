@@ -11,9 +11,9 @@ public class ItemCollector : MonoBehaviour
 		inventory = GetComponent<Inventory>();
 	}
 
-	private void OnCollisionEnter(Collision collision)
+	private void OnControllerColliderHit(ControllerColliderHit hit)
 	{
-		if (collision.transform.TryGetComponent(out Item item))
+		if (hit.transform.TryGetComponent(out Item item))
 		{
 			inventory.AddItem(item);
 		}

@@ -16,9 +16,10 @@ public class Movement : MonoBehaviour
 
 	public void Move(Vector3 direction)
 	{
-		direction.y = 0;
-		rigid.velocity = direction.normalized * speed;
-		SetRotate(direction, 0.05f);
+		Vector3 move = direction.normalized * speed;
+		move.y = rigid.velocity.y;
+		rigid.velocity = move;
+		SetRotate(direction, 0.01f);
 	}
 
 	public void SetRotate(Vector3 dir, float lerpSpeed = 0.15f)

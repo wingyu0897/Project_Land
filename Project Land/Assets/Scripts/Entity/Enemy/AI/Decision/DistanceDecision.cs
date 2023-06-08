@@ -2,14 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DistanceTransition : AITransition
+public class DistanceDecision : AIDecision
 {
 	[SerializeField] private float radius;
 
-	public override bool Change()
+	public override bool Condition()
 	{
 		bool result = Vector3.Distance(transform.position, brain.target.position) <= radius;
-		return !isReverse ? result : !result;
+		if (isReverse)
+			return !result;
+		return result;
 	}
 
 #if UNITY_EDITOR

@@ -17,7 +17,9 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 
 	public void OnDamaged(int damage)
 	{
-		currentHealth -= maxHealth;
+		if (currentHealth <= 0) 
+			return;
+		currentHealth -= damage;
 		currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
 		if (currentHealth <= 0)
