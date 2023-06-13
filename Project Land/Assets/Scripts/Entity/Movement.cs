@@ -4,21 +4,21 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-	private Rigidbody rigid;
+	private CharacterController charController;
 
 	// Properties // 하드코딩
 	[SerializeField] private float speed = 5f;
 
 	private void Awake()
 	{
-		rigid = GetComponent<Rigidbody>();
+		charController = GetComponent<CharacterController>();
 	}
 
 	public void Move(Vector3 direction)
 	{
 		Vector3 move = direction.normalized * speed;
-		move.y = rigid.velocity.y;
-		rigid.velocity = move;
+		move.y = 0;
+		charController.Move(move * Time.deltaTime);
 		SetRotate(direction, 0.01f);
 	}
 

@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
 	private CharacterController charController;
+	public CharacterController CharController => charController;
 	private PlayerAnimator animator;
 	private PlayerActionData actionData;
 
@@ -88,6 +89,13 @@ public class PlayerMovement : MonoBehaviour
 		actionData.isActive = true;
 	}
 
+	public void StopRolling()
+	{
+		actionData.isRolling = false;
+		actionData.isActive = true;
+		animator.Animator.Play("Idle");
+	}
+
 	public void SetRotate(Vector3 dir, float lerpSpeed = 0.15f)
 	{
 		dir.y = 0;
@@ -96,6 +104,6 @@ public class PlayerMovement : MonoBehaviour
 
 	public void SetPosition(Vector3 pos)
 	{
-		charController.Move(pos);
+		charController.Move(pos - transform.position);
 	}
 }

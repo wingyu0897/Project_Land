@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class PlayerBrain : MonoBehaviour
 {
@@ -29,11 +30,35 @@ public class PlayerBrain : MonoBehaviour
 		health.Init();
 	}
 
+	private void Update()
+	{
+		if (Input.GetKeyDown(KeyCode.P))
+		{
+			Init();
+		}
+	}
+
 	public void Dead()
 	{
 		movement.StopMovement();
-		actionData.isDead = true;
 		animator.SetDeadBool(true);
 		animator.SetDeadTrigger(true);
+		SelectItem.Instance.Deselect();
+
+		actionData.isDead = true;
+	}
+
+	[ContextMenu("Init")]
+	public void Init()
+	{
+		if (!Application.isPlaying)
+			return;
+		
+		movement.CharController.enabled = false;
+		transform.SetPositionAndRotation(Define.Instance.spawnPosition, Quaternion.Euler(Vector3.zero));
+		movement.CharController.enabled = true;
+		health.Init();
+		animator.SetDeadBool(false);
+		actionData.isDead = false;
 	}
 }

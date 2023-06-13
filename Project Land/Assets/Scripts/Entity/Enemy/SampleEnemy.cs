@@ -15,7 +15,7 @@ public class SampleEnemy : MonoBehaviour, IDamageable
 		meshRen.GetPropertyBlock(propertyBlock);
 	}
 
-	public void OnDamaged(int damage)
+	public void OnDamaged(int damage, Transform attacker)
 	{
 		propertyBlock.SetColor(colorHash, Color.red);
 		meshRen.SetPropertyBlock(propertyBlock);

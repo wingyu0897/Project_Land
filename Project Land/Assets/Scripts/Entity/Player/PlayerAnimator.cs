@@ -81,6 +81,10 @@ public class PlayerAnimator : MonoBehaviour
 	public void SetDeadBool(bool dead)
 	{
 		animator.applyRootMotion = dead;
+		if (dead == false)
+		{
+			ResetTransform();
+		}
 		animator.SetBool(isdeadHash, dead);
 	}
 

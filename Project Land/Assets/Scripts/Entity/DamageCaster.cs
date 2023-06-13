@@ -13,7 +13,7 @@ public class DamageCaster : MonoBehaviour
 			if (hit.transform.TryGetComponent(out IDamageable damageable))
 			{
 				if (Vector3.Dot(transform.forward, hit.collider.transform.position - transform.position) > 0)
-					damageable.OnDamaged(damage);
+					damageable.OnDamaged(damage, transform);
 			}
 		}
 	}

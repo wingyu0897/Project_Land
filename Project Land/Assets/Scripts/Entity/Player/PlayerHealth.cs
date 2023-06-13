@@ -15,7 +15,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 		currentHealth = maxHealth;
 	}
 
-	public void OnDamaged(int damage)
+	public void OnDamaged(int damage, Transform attacker)
 	{
 		if (currentHealth <= 0) 
 			return;

@@ -33,11 +33,11 @@ public class ClickAndDropResource : Resource, IDamageable
 		}
 	}
 
-	public void OnDamaged(int damage)
+	public void OnDamaged(int damage, Transform attacker)
 	{
 		if (!Obtainable()) return;
 
-		if (SelectItem.Instance.CurrentSelected.Item.GetType() != dedicatedTool.GetType())
+		if (SelectItem.Instance.CurrentSelected?.Item.GetType() != dedicatedTool.GetType() && attacker.gameObject.name.Equals("Player"))
 			damage /= 10;
 
 		health -= damage;

@@ -9,6 +9,7 @@ public class Define : MonoBehaviour
 	public Camera mainCamera;
 	public Transform player;
 	public Transform inventoryTrm;
+	public Vector3 spawnPosition;
 
 	private void Awake()
 	{

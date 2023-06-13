@@ -37,3 +37,6 @@ MonoBehaviour:
   - prefab: {fileID: 1110171408887052830, guid: e30dabc655d719147807f7a0a01f9a61, type: 3}
     count: 1
     parent: Notification
+  - prefab: {fileID: 3900361966208435775, guid: 710f95b08e2472a43a37af92f9a7c32a, type: 3}
+    count: 5
+    parent: PoolManager
