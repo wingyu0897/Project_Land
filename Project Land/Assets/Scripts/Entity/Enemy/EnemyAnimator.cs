@@ -10,6 +10,7 @@ public class EnemyAnimator : MonoBehaviour
 
 	private readonly int speedHash = Animator.StringToHash("speed");
 	private readonly int attackHash = Animator.StringToHash("attack");
+	private readonly int isdeadHash = Animator.StringToHash("isdead");
 
 	public event Action OnEvent = null;
 	public event Action OnEnd = null;
@@ -50,5 +51,10 @@ public class EnemyAnimator : MonoBehaviour
 		{
 			animator.ResetTrigger(attackHash);
 		}
+	}
+
+	public void SetIsDeadBool(bool dead)
+	{
+		animator.SetBool(isdeadHash, dead);
 	}
 }

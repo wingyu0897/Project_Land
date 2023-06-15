@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -9,6 +10,9 @@ public class NotificationPopup : PoolableMono
     [SerializeField] private Image image;
     [SerializeField] private TextMeshProUGUI titleText;
     [SerializeField] private TextMeshProUGUI infoText;
+
+	public Coroutine popupCoroutine;
+	public Sequence seq;
 
 	public void SetData(Sprite sprite, string title, string info)
 	{
@@ -22,5 +26,8 @@ public class NotificationPopup : PoolableMono
 		image.sprite = null;
 		titleText.text = "";
 		infoText.text = "";
+
+		popupCoroutine = null;
+		seq = null;
 	}
 }

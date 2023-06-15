@@ -25,8 +25,17 @@ public class NotificationManager : MonoBehaviour
         popup.transform.position = popupPoint.position;
 
         TakeUp();
+
+        if (popups.Count > 5)
+		{
+            StopCoroutine(popups[0].popupCoroutine);
+            popups[0].seq.Kill();
+            PoolManager.Instance.Push(popups[0]);
+            popups.Remove(popups[0]);
+        }
+
         popups.Add(popup);
-        StartCoroutine(PopupNotification(popup));
+        popup.popupCoroutine = StartCoroutine(PopupNotification(popup));
 	}
 
     private void TakeUp()
@@ -45,6 +54,8 @@ public class NotificationManager : MonoBehaviour
         yield return new WaitForSeconds(3f);
 
         Sequence seq = DOTween.Sequence();
+        popup.seq = seq;
+
         Tween t = DOTween.To(() => popup.transform.localPosition.x, x => popup.transform.localPosition = new Vector3(x, popup.transform.localPosition.y), 0, 0.5f).SetEase(Ease.Linear);
         seq.Append(t);
         seq.AppendCallback(() => {

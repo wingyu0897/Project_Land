@@ -12,12 +12,13 @@ public class ChaseState : BaseAIState
 	public override void OnExitState()
 	{
 		brain.animator.SetSpeed(0f);
+		brain.movement.StopMovement();
 	}
 
 	public override void UpdateState()
 	{
 		Vector3 dir = brain.target.position - transform.position;
 		dir.y = 0;
-		brain.movement.Move(dir);
+		brain.movement.SetMove(dir.normalized);
 	}
 }

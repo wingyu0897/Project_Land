@@ -16,8 +16,8 @@ TagManager:
   - Item
   - Interactable
   - Resource
-  - 
-  - 
+  - Enemy
+  - Player
   - 
   - 
   - 

@@ -5,4 +5,5 @@ using UnityEngine;
 public class EnemyActionData : MonoBehaviour
 {
     public bool isAttacking = false;
+    public bool isDead = false;
 }

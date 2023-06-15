@@ -6,6 +6,7 @@ public class LandManager : MonoBehaviour
 {
 	public LandManager Instance;
 
+	public float landSize = 15f;
 	public Vector2Int position;
 	public Land land;
 
@@ -19,6 +20,11 @@ public class LandManager : MonoBehaviour
 		}
 	}
 
+	public void AddLand(Vector2Int position)
+	{
+		AddLand(position, land);
+	}
+
 	public void AddLand(Vector2Int position, Land land)
 	{
 		if (lands.ContainsKey(position) || position == Vector2Int.zero)
@@ -28,7 +34,7 @@ public class LandManager : MonoBehaviour
 		}
 
 		Land newLand = PoolManager.Instance.Pop(land.gameObject.name) as Land;
-		newLand.transform.position = new Vector3(position.x * 15, 0, position.y * 15);
+		newLand.transform.position = new Vector3(position.x * landSize, 0, position.y * landSize);
 		lands.Add(position, newLand);
 
 		newLand.OnSpawned();
