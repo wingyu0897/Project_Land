@@ -10,12 +10,14 @@ public class PlayerMovement : MonoBehaviour
 	private PlayerActionData actionData;
 
 	// Properties // 하드코딩
-	[SerializeField] private float speed = 5f;
+	[SerializeField] private MovementDataSO data;
 	[SerializeField] private float gravity = -9.81f;
 
 	private float verticalVelocity;
 	private Vector3 moveVelocity = Vector3.zero;
 	private Vector3 inputVelocity = Vector3.zero;
+	private Vector3 walkDir = Vector3.zero;
+	private bool rotateByVelocity = true;
 
 	private void Awake()
 	{
@@ -31,11 +33,32 @@ public class PlayerMovement : MonoBehaviour
 			verticalVelocity += gravity * Time.fixedDeltaTime;
 		}
 
+		Vector3 forwardVec = Quaternion.Inverse(transform.rotation) * inputVelocity.normalized;
+		if (forwardVec == Vector3.zero)
+			walkDir = Vector3.zero;
+		walkDir = Vector3.Lerp(walkDir, forwardVec, 0.1f);
+		animator.SetMove(new Vector2(walkDir.x, walkDir.z).normalized);
+
 		CalculateMoveVelocity();
 
 		Vector3 move = moveVelocity + verticalVelocity * Vector3.up;
 		charController.Move(move);
 		animator.SetSpeed(moveVelocity.magnitude);
+
+
+		if (moveVelocity.sqrMagnitude > 0 && rotateByVelocity)
+		{
+			SetRotate(moveVelocity);
+		}
+		else if (rotateByVelocity == false)
+		{
+			RaycastHit hit;
+			Physics.Raycast(Define.Instance.mainCamera.ScreenPointToRay(Input.mousePosition), out hit, 50f, 1 << LayerMask.NameToLayer("Ground"));
+			if (hit.collider != null)
+			{
+				SetRotate(hit.point - transform.position, 1f);;
+			}
+		}
 	}
 
 	private void CalculateMoveVelocity()
@@ -43,11 +66,15 @@ public class PlayerMovement : MonoBehaviour
 		if (!actionData.isActive) return;
 
 		inputVelocity.Normalize();
+
 		moveVelocity = Quaternion.Euler(0, 45, 0) * inputVelocity;
-		moveVelocity *= Time.fixedDeltaTime * speed;
-		if (moveVelocity.sqrMagnitude > 0)
+		if (actionData.canRun)
 		{
-			SetRotate(moveVelocity);
+			moveVelocity *= Time.fixedDeltaTime * data.runSpeed;
+		}
+		else
+		{
+			moveVelocity *= Time.fixedDeltaTime * data.walkSpeed;
 		}
 	}
 
@@ -98,12 +125,32 @@ public class PlayerMovement : MonoBehaviour
 
 	public void SetRotate(Vector3 dir, float lerpSpeed = 0.15f)
 	{
+		if (!actionData.canRotate)
+			return;
+
 		dir.y = 0;
-		transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dir), lerpSpeed);
+		transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dir.normalized), lerpSpeed);
 	}
 
 	public void SetPosition(Vector3 pos)
 	{
 		charController.Move(pos - transform.position);
+	}
+
+	public void ChangeMovementMode()
+	{
+		ChangeMovementMode(!actionData.canRun);
+	}
+
+	public void ChangeMovementMode(bool run)
+	{
+		actionData.canRun = run;
+		rotateByVelocity = actionData.canRun;
+
+		animator.SetWalkTrigger(!actionData.canRun);
+		animator.SetWalkBool(!actionData.canRun);
+
+		if (run == true)
+			StopMovement();
 	}
 }

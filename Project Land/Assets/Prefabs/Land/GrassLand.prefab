@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 4353914657728806630}
   - component: {fileID: 5256505413501939905}
   - component: {fileID: 1598779319146258687}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -171,6 +171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e82e24100737da94b99e044017fadd37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weight: 100
   resourceCount: 5
   resource: {fileID: 4946402303088932354, guid: 933e807ed0a567e4495325ebaf450a21, type: 3}
   resources: []

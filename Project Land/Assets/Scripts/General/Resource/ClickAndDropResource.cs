@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class ClickAndDropResource : Resource, IDamageable
 {
-	[SerializeField] private Item dedicatedTool;
-	[SerializeField] private int maxHealth;
-	private int health;
+	[SerializeField] protected Item dedicatedTool;
+	[SerializeField] protected int maxHealth;
+	protected int health;
 
 	public void Awake()
 	{
@@ -38,7 +38,7 @@ public class ClickAndDropResource : Resource, IDamageable
 		if (!Obtainable()) return;
 
 		if (SelectItem.Instance.CurrentSelected?.Item.GetType() != dedicatedTool.GetType() && attacker.gameObject.name.Equals("Player"))
-			damage /= 10;
+			damage /= 2;
 
 		health -= damage;
 		health = Mathf.Clamp(health, 0, maxHealth);

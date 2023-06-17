@@ -28,7 +28,7 @@ public class PlayerInput : MonoBehaviour
 
 		UpdateMoveInput();
 		UpdateRollingInput();
-		UpdateClickInput();
+		UpdateMouseInput();
 		UpdateInteractInput();
 		UpdateItemInput();
 		UpdateInventoryInput();
@@ -101,7 +101,7 @@ public class PlayerInput : MonoBehaviour
 		}
 	}
 
-	private void UpdateClickInput()
+	private void UpdateMouseInput()
 	{
 		if (EventSystem.current.IsPointerOverGameObject())
 		{
@@ -113,6 +113,10 @@ public class PlayerInput : MonoBehaviour
 			if (!actionData.isAttacking && actionData.isActive)
 				OnAttackClickAction?.Invoke();
 			OnClickAction?.Invoke();
+		}
+		if (Input.GetMouseButtonDown(1))
+		{
+			movement.ChangeMovementMode();
 		}
 	}
 }

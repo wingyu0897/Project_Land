@@ -10,6 +10,9 @@ public class LandManager : MonoBehaviour
 	public Vector2Int position;
 	public Land land;
 
+	public List<Land> spawnableLands = new List<Land>();
+	private int maxWeight = 0;
+
 	public Dictionary<Vector2Int, Land> lands = new Dictionary<Vector2Int, Land>();
 
 	private void Awake()
@@ -18,11 +21,16 @@ public class LandManager : MonoBehaviour
 		{
 			Instance = this;
 		}
+
+		foreach (Land land in spawnableLands)
+		{
+			maxWeight += land.GetWeight();
+		}
 	}
 
 	public void AddLand(Vector2Int position)
 	{
-		AddLand(position, land);
+		AddLand(position, GetRandomLand());
 	}
 
 	public void AddLand(Vector2Int position, Land land)
@@ -38,5 +46,23 @@ public class LandManager : MonoBehaviour
 		lands.Add(position, newLand);
 
 		newLand.OnSpawned();
+	}
+
+	private Land GetRandomLand()
+	{
+		int curWeight = 0;
+		int weight = Random.Range(0, maxWeight + 1);
+
+		foreach (Land land in spawnableLands)
+		{
+			curWeight += land.GetWeight();
+
+			if (weight <= curWeight)
+			{
+				return land;
+			}
+		}
+
+		return this.land;
 	}
 }

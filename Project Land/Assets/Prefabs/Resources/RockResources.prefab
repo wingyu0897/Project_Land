@@ -109,5 +109,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resource: {fileID: 6106755355042108188, guid: 25e65fd9325da1d4a9054032b9f29a2c, type: 3}
+  minimumSpace: 0.6
   dedicatedTool: {fileID: 5910329149136243007, guid: 442f77378ada65747b9aca2ed9172783, type: 3}
   maxHealth: 10

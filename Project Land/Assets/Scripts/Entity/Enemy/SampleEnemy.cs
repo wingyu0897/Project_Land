@@ -6,7 +6,7 @@ public class SampleEnemy : MonoBehaviour, IDamageable
 {
 	private MeshRenderer meshRen;
 	private MaterialPropertyBlock propertyBlock;
-	private readonly int colorHash = Shader.PropertyToID("_Color");
+	private readonly int blinkHash = Shader.PropertyToID("_Blink");
 
 	private void Awake()
 	{
@@ -17,7 +17,7 @@ public class SampleEnemy : MonoBehaviour, IDamageable
 
 	public void OnDamaged(int damage, Transform attacker)
 	{
-		propertyBlock.SetColor(colorHash, Color.red);
+		propertyBlock.SetFloat(blinkHash, 1f);
 		meshRen.SetPropertyBlock(propertyBlock);
 		StartCoroutine(OnHit());
 	}
@@ -26,7 +26,7 @@ public class SampleEnemy : MonoBehaviour, IDamageable
 	{
 		yield return new WaitForSeconds(0.2f);
 
-		propertyBlock.SetColor(colorHash, Color.white);
+		propertyBlock.SetFloat(blinkHash, 0f);
 		meshRen.SetPropertyBlock(propertyBlock);
 	}
 }

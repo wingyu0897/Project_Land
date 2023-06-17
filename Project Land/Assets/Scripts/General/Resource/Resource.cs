@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class Resource : PoolableMono
 {
     [SerializeField] protected Item resource; // 반환할 자원
+	[SerializeField] public float minimumSpace = 1f;
 
     protected PlayerInput input;
     protected SelectItem select;
@@ -22,4 +23,16 @@ public abstract class Resource : PoolableMono
 
 	public abstract bool Obtainable();
 	public abstract void Obtain();
+
+#if UNITY_EDITOR
+	private void OnDrawGizmos()
+	{
+		if (UnityEditor.Selection.activeGameObject == gameObject)
+		{
+			Gizmos.color = Color.red;
+			Gizmos.DrawWireSphere(transform.position, minimumSpace);
+			Gizmos.color = Color.white;
+		}
+	}
+#endif
 }

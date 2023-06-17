@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class Item : PoolableMono
 {
+	[Header("Data")]
 	public ItemDataSO data;
+
+	[Header("Properties")]
+	public int price = 1;
+	public bool isDropable = true;
 
 	protected Collider coll;
 	protected Rigidbody rigid;
@@ -33,8 +38,11 @@ public class Item : PoolableMono
 		transform.localEulerAngles = Vector3.zero;
 	}
 
-	public virtual void OnDrop()
+	public virtual bool OnDrop()
 	{
+		if (isDropable == false)
+			return false;
+
 		isDrop = true;
 		dropTime = Time.time;
 
@@ -46,6 +54,8 @@ public class Item : PoolableMono
 		coll.enabled = true;
 		rigid.useGravity = true;
 		rigid.isKinematic = false;
+
+		return true;
 	}
 
 	public virtual void OnSelect()

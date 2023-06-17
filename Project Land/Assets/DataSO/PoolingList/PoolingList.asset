@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe6dc44029c766842bbfd1864ba913ee, type: 3}
+  m_Name: PoolingList
+  m_EditorClassIdentifier: 
+  poolingList:
+  - prefab: {fileID: 917524482, guid: 5dde8da68502e1648b7b99c2f05c735e, type: 3}
+    count: 10
+    parent: PoolManager
+  - prefab: {fileID: 6106755355042108188, guid: 25e65fd9325da1d4a9054032b9f29a2c, type: 3}
+    count: 10
+    parent: PoolManager
+  - prefab: {fileID: 3266049217827699052, guid: a79b7950d4058224ea8e8f8e4f62b815, type: 3}
+    count: 10
+    parent: InnerSlot
+  - prefab: {fileID: -4782644311945238900, guid: 2986d76de4a13204384df14c827027db, type: 3}
+    count: 10
+    parent: Canvas
+  - prefab: {fileID: 4946402303088932354, guid: 933e807ed0a567e4495325ebaf450a21, type: 3}
+    count: 0
+    parent: Resources
+  - prefab: {fileID: 2718280503433999230, guid: 9a4b417f4d5def343841b4c03f548a15, type: 3}
+    count: 0
+    parent: Resources
+  - prefab: {fileID: 7531695301973766466, guid: cfa30332e80cba9418af25c41f821166, type: 3}
+    count: 1
+    parent: PoolManager
+  - prefab: {fileID: 1110171408887052830, guid: e30dabc655d719147807f7a0a01f9a61, type: 3}
+    count: 1
+    parent: Notification
+  - prefab: {fileID: 3900361966208435775, guid: 710f95b08e2472a43a37af92f9a7c32a, type: 3}
+    count: 5
+    parent: PoolManager
+  - prefab: {fileID: 7885206700859489896, guid: 4f1e64c170fe0f04fb878bbb33869db8, type: 3}
+    count: 0
+    parent: PoolManager

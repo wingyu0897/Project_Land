@@ -51,6 +51,8 @@ public class MeleeItem : Item
 		actionData.isActive = false;
 		actionData.isAttacking = true;
 		actionData.canChange = false;
+		actionData.canRotate = false;
+		actionData.canRun = false;
 	}
 
 	public virtual void AttackEndHandle()
@@ -66,6 +68,10 @@ public class MeleeItem : Item
 		actionData.isActive = true;
 		actionData.isAttacking = false;
 		actionData.canChange = true;
+		actionData.canRotate = true;
+		actionData.canRun = true;
+
+		movement.ChangeMovementMode(true);
 	}
 
 	public virtual void AttackHandle()

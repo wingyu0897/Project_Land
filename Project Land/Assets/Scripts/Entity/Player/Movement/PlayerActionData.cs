@@ -10,5 +10,7 @@ public class PlayerActionData : MonoBehaviour
     public bool isInteracting = false;  // 상호작용 중인가
     public bool canChange = true;       // 현재 들고있는 아이템 변경이 가능한가
     public bool canClick = true;        // 클릭이 가능한가
+    public bool canRun = true;          // 뛰기 가능
+    public bool canRotate = true;       // 회전 가능
     public bool isDead = false;         // 죽었는가
 }

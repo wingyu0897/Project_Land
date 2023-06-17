@@ -76,9 +76,10 @@ public class DragableItem : PoolableMono, IBeginDragHandler, IDragHandler, IEndD
 		}
 	}
 
-	public void DropItem()
+	public bool DropItem()
 	{
-		if (itemCount == 0) return;
+		if (itemCount == 0) 
+			return false;
 
 		Item drop;
 
@@ -87,17 +88,22 @@ public class DragableItem : PoolableMono, IBeginDragHandler, IDragHandler, IEndD
 		else
 			drop = item;
 
-		drop.OnDrop();
-		itemCount--;
-		SetCountText();
-
-		if (itemCount == 0)
+		if (drop.OnDrop())
 		{
-			item = null;
-			InventorySlot oldSlot = parentSlot?.parent.GetComponent<InventorySlot>();
-			oldSlot.RemoveSlot();
-			PoolManager.Instance.Push(this);
+			itemCount--;
+			SetCountText();
+
+			if (itemCount == 0)
+			{
+				item = null;
+				InventorySlot oldSlot = parentSlot?.parent.GetComponent<InventorySlot>();
+				oldSlot.RemoveSlot();
+				PoolManager.Instance.Push(this);
+			}
+			return true;
 		}
+
+		return false;
 	}
 
 	public void RemoveItem()

@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
 	public void StartGame()
 	{
 		dayManager.SetDayTimer(true);
+		AddLands();
 	}
 
 	public void StopGame()
