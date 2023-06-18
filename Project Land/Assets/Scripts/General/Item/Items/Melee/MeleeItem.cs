@@ -12,6 +12,20 @@ public class MeleeItem : Item
 	protected PlayerAnimator animator;
 	protected DamageCaster damageCaster;
 
+	public override void Init()
+	{
+		base.Init();
+
+		if (input == null)
+		{
+			input = Define.Instance.player.GetComponent<PlayerInput>();
+			movement = Define.Instance.player.GetComponent<PlayerMovement>();
+			actionData = Define.Instance.player.GetComponent<PlayerActionData>();
+			animator = Define.Instance.player.Find("Visual").GetComponent<PlayerAnimator>();
+			damageCaster = Define.Instance.player.GetComponent<DamageCaster>();
+		}
+	}
+
 	protected virtual void Start()
 	{
 		input = Define.Instance.player.GetComponent<PlayerInput>();
@@ -70,8 +84,6 @@ public class MeleeItem : Item
 		actionData.canChange = true;
 		actionData.canRotate = true;
 		actionData.canRun = true;
-
-		movement.ChangeMovementMode(true);
 	}
 
 	public virtual void AttackHandle()

@@ -32,6 +32,9 @@ public class Inventory : MonoBehaviour
 
 	public void AddItem(Item item)
 	{
+		if (item.isDrop == false)
+			return;
+
 		NotificationManager.Instance.Notification(item.data.image, "Item Obtained", $"You obtained {item.data.itemName}.");
 		
 		item.OnPickUp();

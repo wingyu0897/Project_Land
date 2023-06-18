@@ -62,6 +62,7 @@ MonoBehaviour:
   resource: {fileID: 917524482, guid: 5dde8da68502e1648b7b99c2f05c735e, type: 3}
   minimumSpace: 20
   dedicatedTool: {fileID: 4713603404249508137, guid: 8d3210f0ac8c3dc44bad5d97d2311e93, type: 3}
+  dedicatedToolBuff: 2
   maxHealth: 10
 --- !u!1001 &2252670155476134633
 PrefabInstance:

@@ -88,7 +88,7 @@ public class CraftingTable : Interactable
 		for (int i = 0; i < recipe.requires.Count; i++)
 		{
 			requireItemSlots[i].gameObject.SetActive(true);
-			requireItemSlots[i].SetItem(recipe.requires[i].item);
+			requireItemSlots[i].SetItem(recipe.requires[i].item, recipe.requires[i].count);
 		}
 		craftBtn.interactable = inventory.FindItem(recipe);
 		currentRecipe = recipe;

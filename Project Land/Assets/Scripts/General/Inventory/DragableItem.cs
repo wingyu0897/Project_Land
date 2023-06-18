@@ -140,5 +140,6 @@ public class DragableItem : PoolableMono, IBeginDragHandler, IDragHandler, IEndD
 		}
 
 		parentSlot = parent;
+		transform.SetParent(parent);
 	}
 }

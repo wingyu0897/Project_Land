@@ -110,10 +110,14 @@ public class PlayerMovement : MonoBehaviour
 
 	private IEnumerator Rolling()
 	{
+		bool rotV = rotateByVelocity;
+		rotateByVelocity = true;
+
 		yield return new WaitForSeconds(1f);
 
 		actionData.isRolling = false;
 		actionData.isActive = true;
+		rotateByVelocity = rotV;
 	}
 
 	public void StopRolling()
@@ -139,16 +143,16 @@ public class PlayerMovement : MonoBehaviour
 
 	public void ChangeMovementMode()
 	{
-		ChangeMovementMode(!actionData.canRun);
+		ChangeMovementMode(!rotateByVelocity);
 	}
 
 	public void ChangeMovementMode(bool run)
 	{
-		actionData.canRun = run;
-		rotateByVelocity = actionData.canRun;
+		//actionData.canRun = run;
+		rotateByVelocity = run;
 
-		animator.SetWalkTrigger(!actionData.canRun);
-		animator.SetWalkBool(!actionData.canRun);
+		//animator.SetWalkTrigger(!actionData.canRun);
+		//animator.SetWalkBool(!actionData.canRun);
 
 		if (run == true)
 			StopMovement();

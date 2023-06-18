@@ -5,6 +5,7 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
 	private CharacterController charController;
+	public CharacterController CharController => charController;
 
 	// Properties // 하드코딩
 	[SerializeField] private float speed = 5f;
@@ -29,7 +30,8 @@ public class Movement : MonoBehaviour
 		CalculateMoveVelocity();
 
 		Vector3 move = moveVelocity + verticalVelocity * Vector3.up;
-		charController.Move(move);
+		if (charController.enabled == true)
+			charController.Move(move);
 	}
 
 	private void CalculateMoveVelocity()
@@ -54,6 +56,11 @@ public class Movement : MonoBehaviour
 	{
 		inputVelocity = Vector3.zero;
 		moveVelocity = Vector3.zero;
+	}
+
+	public void SetPosition(Vector3 pos)
+	{
+		charController.Move(pos - transform.position);
 	}
 
 	public void SetRotate(Vector3 dir, float lerpSpeed = 0.15f)

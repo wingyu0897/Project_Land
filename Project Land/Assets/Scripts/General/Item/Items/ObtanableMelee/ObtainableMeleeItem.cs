@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class ObtainableMeleeItem : MeleeItem
 {
-	protected override void Start()
-	{
-		base.Start();
-	}
-
 	public override void OnDeselect()
 	{
 		base.OnDeselect();

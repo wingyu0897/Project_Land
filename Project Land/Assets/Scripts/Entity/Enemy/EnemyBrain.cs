@@ -11,13 +11,15 @@ public class EnemyBrain : PoolableMono
 	public Movement movement;
 	[HideInInspector]
 	public EnemyAnimator animator;
-	private EnemyHealth health;
+	[HideInInspector]
+	public EnemyHealth health;
 	private Collider col;
 
 	[Header("Set")]
 	[SerializeField] private BaseAIState defaultState;
 	[SerializeField] private BaseAIState currentState;
 
+	public Transform basePosition;
 	public Transform target;
 
 	[Header("Event")]

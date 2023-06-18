@@ -2,6 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class ReservedLand
+{
+	public Land land;
+	public Vector2Int position;
+}
+
 public class LandManager : MonoBehaviour
 {
 	public LandManager Instance;
@@ -11,6 +18,7 @@ public class LandManager : MonoBehaviour
 	public Land land;
 
 	public List<Land> spawnableLands = new List<Land>();
+	public List<ReservedLand> reserveds = new List<ReservedLand>();
 	private int maxWeight = 0;
 
 	public Dictionary<Vector2Int, Land> lands = new Dictionary<Vector2Int, Land>();
@@ -30,7 +38,16 @@ public class LandManager : MonoBehaviour
 
 	public void AddLand(Vector2Int position)
 	{
-		AddLand(position, GetRandomLand());
+		Land land = GetRandomLand();
+		foreach (ReservedLand reserved in reserveds)
+		{
+			if (position == reserved.position)
+			{
+				land = reserved.land;
+			}
+		}
+
+		AddLand(position, land);
 	}
 
 	public void AddLand(Vector2Int position, Land land)
@@ -63,6 +80,6 @@ public class LandManager : MonoBehaviour
 			}
 		}
 
-		return this.land;
+		return land;
 	}
 }

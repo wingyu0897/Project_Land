@@ -14,7 +14,7 @@ public class Item : PoolableMono
 	protected Collider coll;
 	protected Rigidbody rigid;
 
-	protected bool isDrop = true;
+	public bool isDrop = true;
 	protected float dropTime;
 
 	protected virtual void Awake()

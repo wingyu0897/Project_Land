@@ -17,7 +17,6 @@ public class StoneMeleeItem : MeleeItem
 
 		actionData.isAttacking = true;
 		actionData.canChange = false;
-
 		actionData.canRun = false;
 		actionData.canRotate = false;
 	}
@@ -26,18 +25,17 @@ public class StoneMeleeItem : MeleeItem
 	{
 		if (!actionData.isAttacking) return;
 
-		animator.ResetTransform();
 		animator.SetWalkBool(false);
 		animator.SetMeleeAttackBool(false);
+		animator.ResetTransform();
 		animator.OnEnd -= AttackEndHandle;
 		animator.OnEvent -= AttackHandle;
 
 		actionData.isAttacking = false;
 		actionData.canChange = true;
-
 		actionData.canRun = true;
 		actionData.canRotate = true;
 
-		movement.ChangeMovementMode(true);
+		movement.StopMovement();
 	}
 }

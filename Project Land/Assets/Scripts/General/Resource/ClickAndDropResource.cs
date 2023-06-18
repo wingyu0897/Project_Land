@@ -3,7 +3,9 @@ using UnityEngine;
 public class ClickAndDropResource : Resource, IDamageable
 {
 	[SerializeField] protected Item dedicatedTool;
+	[SerializeField] protected int dedicatedToolBuff = 2;
 	[SerializeField] protected int maxHealth;
+	[SerializeField] protected int dropCount = 3;
 	protected int health;
 
 	public void Awake()
@@ -26,10 +28,12 @@ public class ClickAndDropResource : Resource, IDamageable
 
 	public override void Obtain()
 	{
-		for (int i = 0; i < 3; ++i)
+		for (int i = 0; i < dropCount; ++i)
 		{
 			Item item = PoolManager.Instance.Pop(resource.data.prefab.name) as Item;
-			item.transform.position = transform.position + new Vector3(0, 1f * (i + 1), 0);
+			Vector3 pos = transform.position + new Vector3(0, 1f * (i + 1), 0);
+			float ran = Random.Range(0, 360);
+			item.transform.SetPositionAndRotation(pos, Quaternion.Euler(Vector3.one * ran));
 		}
 	}
 
@@ -38,7 +42,7 @@ public class ClickAndDropResource : Resource, IDamageable
 		if (!Obtainable()) return;
 
 		if (SelectItem.Instance.CurrentSelected?.Item.GetType() != dedicatedTool.GetType() && attacker.gameObject.name.Equals("Player"))
-			damage /= 2;
+			damage /= dedicatedToolBuff;
 
 		health -= damage;
 		health = Mathf.Clamp(health, 0, maxHealth);
