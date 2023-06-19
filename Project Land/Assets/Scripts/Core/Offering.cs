@@ -21,9 +21,9 @@ public class Offering : MonoBehaviour
 		quota = quotaStart;
 	}
 
-	private void OnCollisionEnter(Collision collision)
+	private void OnTriggerEnter(Collider other)
 	{
-		if (collision.gameObject.TryGetComponent(out Item item))
+		if (other.gameObject.TryGetComponent(out Item item))
 		{
 			if (item.isDrop)
 			{

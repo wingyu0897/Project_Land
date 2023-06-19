@@ -129,8 +129,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 3768e276b4611a14f8978554f63d3b1d, type: 2}
-  price: 10
+  price: 30
   isDropable: 1
+  isDrop: 1
   meleeData: {fileID: 11400000, guid: 3768e276b4611a14f8978554f63d3b1d, type: 2}
 --- !u!54 &4713603404249508136
 Rigidbody:

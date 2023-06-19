@@ -40,7 +40,7 @@ public class SelectItem : MonoBehaviour
 
 		Deselect();
 		currentSelected = nextItem;
-		currentSelected?.Item.OnSelect();
+		currentSelected?.Item?.OnSelect();
 	}
 
 	public void Deselect()

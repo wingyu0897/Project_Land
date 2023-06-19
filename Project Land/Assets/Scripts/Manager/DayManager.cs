@@ -8,6 +8,7 @@ public class DayManager : MonoBehaviour
 {
 	[SerializeField] private Slider daySlider;
     [SerializeField] private float startDayTime;
+    [SerializeField] private float endDayTime;
     [SerializeField] private float dayTimeMultiply;
 	private float maxDayTime;
     private float currentDayTime = 0;
@@ -40,6 +41,7 @@ public class DayManager : MonoBehaviour
 				currentDayTime = 0;
 				currentDay++;
 				maxDayTime *= dayTimeMultiply;
+				maxDayTime = Mathf.Clamp(maxDayTime, 0, endDayTime);
 
 				OnDayChanged?.Invoke(currentDay);
 			}

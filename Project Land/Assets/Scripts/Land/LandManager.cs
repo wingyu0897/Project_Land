@@ -13,6 +13,7 @@ public class LandManager : MonoBehaviour
 {
 	public LandManager Instance;
 
+	public int landMax;
 	public float landSize = 15f;
 	public Vector2Int position;
 	public Land land;
@@ -38,6 +39,9 @@ public class LandManager : MonoBehaviour
 
 	public void AddLand(Vector2Int position)
 	{
+		if (lands.Count >= landMax-1)
+			return;
+
 		Land land = GetRandomLand();
 		foreach (ReservedLand reserved in reserveds)
 		{

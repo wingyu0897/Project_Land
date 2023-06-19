@@ -1671,6 +1671,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Instance: {fileID: 0}
+  landMax: 81
   landSize: 20
   position: {x: 0, y: 0}
   land: {fileID: 3900361966208435775, guid: 710f95b08e2472a43a37af92f9a7c32a, type: 3}
@@ -4379,7 +4380,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 601299297}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -4460,10 +4461,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   contribution: 0
-  quotaStart: 0
+  quotaStart: 50
   quota: 0
-  quotaMax: 0
-  quotaIncre: 0
+  quotaMax: 5000
+  quotaIncre: 2
 --- !u!114 &601299303
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9923,8 +9924,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   daySlider: {fileID: 789011657}
-  startDayTime: 120
-  dayTimeMultiply: 1
+  startDayTime: 60
+  endDayTime: 120
+  dayTimeMultiply: 2
   currentDay: 1
   OnDayChanged:
     m_PersistentCalls:
@@ -13145,7 +13147,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -400}
+  m_AnchoredPosition: {x: 220, y: -250}
   m_SizeDelta: {x: 160, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1853024690

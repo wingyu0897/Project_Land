@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0889219086185f44989e303886e7c9d8, type: 3}
   m_Name: SwordData
   m_EditorClassIdentifier: 
-  itemName: Sword
+  itemName: Long Sword
   image: {fileID: 21300000, guid: 09b3bff2ced57c5428a5d5369faebbfc, type: 3}
   maxCapacity: 1
   prefab: {fileID: 5467780890718120190, guid: ddce8b056820f0a47a3cfd8c380589b2, type: 3}

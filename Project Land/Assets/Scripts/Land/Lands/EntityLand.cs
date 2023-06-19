@@ -23,7 +23,6 @@ public class EntityLand : Land
 	public override void OnSpawned()
 	{
 		SpawnEntity();
-		entity.health.OnDie.AddListener(OnDieHandle);
 	}
 
 	protected virtual void Update()
@@ -60,6 +59,7 @@ public class EntityLand : Land
 		entity.movement.CharController.enabled = false;
 		entity.transform.position = transform.position + new Vector3(0, 0.5f, 0);
 		entity.movement.CharController.enabled = true;
+		entity.health.OnDie.AddListener(OnDieHandle);
 
 		respawn = false;
 	}

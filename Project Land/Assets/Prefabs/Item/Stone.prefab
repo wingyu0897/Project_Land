@@ -158,3 +158,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: c0e322189d8f7c84799227c136715b3f, type: 2}
+  price: 5
+  isDropable: 1
+  isDrop: 1

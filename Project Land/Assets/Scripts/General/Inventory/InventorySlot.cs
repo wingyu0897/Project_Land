@@ -32,8 +32,8 @@ public class InventorySlot : PoolableMono, IDropHandler
 		{
 			gameObject.SetActive(false);
 		}
-		print(transform.root.gameObject.name);
-		dragItem.ChangeParent(transform.root);
+		if (isHot)
+			dragItem.ChangeParent(transform.root);
 		dragItem = null;
 		if (!isHot)
 			PoolManager.Instance.Push(this);
