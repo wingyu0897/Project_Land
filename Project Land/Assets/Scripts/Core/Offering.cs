@@ -5,6 +5,10 @@ using UnityEngine;
 public class Offering : MonoBehaviour
 {
 	public float contribution;
+	public float quotaStart;
+	public float quota;
+	public float quotaMax;
+	public float quotaIncre;
 
 	private void Awake()
 	{
@@ -14,6 +18,7 @@ public class Offering : MonoBehaviour
 	public void Init()
 	{
 		contribution = 0;
+		quota = quotaStart;
 	}
 
 	private void OnCollisionEnter(Collision collision)
@@ -22,9 +27,24 @@ public class Offering : MonoBehaviour
 		{
 			if (item.isDrop)
 			{
+				if (contribution >= quota)
+					return;
+
 				contribution += item.price;
+				GameManager.Instance.Contribution += item.price;
 				PoolManager.Instance.Push(item);
 			}
 		}
+	}
+
+	public void IncrementQuota()
+	{
+		quota *= quotaIncre;
+		quota = Mathf.Clamp(quota, 0, quotaMax);
+	}
+
+	public void ResetQuota()
+	{
+		quota = 0;
 	}
 }

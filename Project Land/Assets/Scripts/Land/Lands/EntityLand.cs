@@ -37,6 +37,13 @@ public class EntityLand : Land
 				SpawnEntity();
 			}
 		}
+
+		if (Vector3.Distance(entity.transform.position, transform.position) > 20)
+		{
+			entity.movement.CharController.enabled = false;
+			entity.transform.position = transform.position + new Vector3(0, 0.5f, 0);
+			entity.movement.CharController.enabled = true;
+		}
 	}
 
 	protected virtual void OnDieHandle()

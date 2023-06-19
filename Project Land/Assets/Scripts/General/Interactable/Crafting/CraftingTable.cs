@@ -56,13 +56,9 @@ public class CraftingTable : Interactable
 		}
 	}
 
-	private void Awake()
-	{
-		MakeRecipeBtn();
-	}
-
 	protected override void Start()
 	{
+		MakeRecipeBtn();
 		base.Start();
 		inventory = Define.Instance.player.GetComponent<Inventory>();
 	}
@@ -71,6 +67,8 @@ public class CraftingTable : Interactable
 	{
 		for (int i = 0; i < recipeList.recipes.Count; i++)
 		{
+			if (recipeButtonPrefab == null)
+				print("Btn");
 			RecipeButton recipeBtn = PoolManager.Instance.Pop(recipeButtonPrefab.gameObject.name) as RecipeButton;
 			recipeBtn.crafting = this;
 			recipeBtn.transform.SetParent(recipeButtonParent);

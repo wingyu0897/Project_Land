@@ -172,9 +172,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weight: 200
-  resourceCount: 5
+  resourceCount: 3
   resource:
   - {fileID: 4946402303088932354, guid: 933e807ed0a567e4495325ebaf450a21, type: 3}
+  - {fileID: 3810976262364262006, guid: e768941fd7be89747b2dcb1129ba18e8, type: 3}
+  - {fileID: 2259821449414485548, guid: dad3aaf6649e10e4481d9f59c95f18e6, type: 3}
   resources: []
 --- !u!1 &6067090029281903995
 GameObject:

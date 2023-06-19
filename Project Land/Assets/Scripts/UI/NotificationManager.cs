@@ -8,6 +8,7 @@ public class NotificationManager : MonoBehaviour
     public static NotificationManager Instance;
     [SerializeField] private Transform popupPoint;
     [SerializeField] private NotificationPopup prefab;
+    [SerializeField] private Sprite defaultImage;
     [SerializeField] private float padding = 20f;
 
     private List<NotificationPopup> popups = new List<NotificationPopup>();
@@ -20,6 +21,8 @@ public class NotificationManager : MonoBehaviour
 
     public void Notification(Sprite image, string title, string info)
 	{
+        if (image == null)
+            image = defaultImage;
         NotificationPopup popup = PoolManager.Instance.Pop(prefab.gameObject.name) as NotificationPopup;
         popup.SetData(image, title, info);
         popup.transform.position = popupPoint.position;

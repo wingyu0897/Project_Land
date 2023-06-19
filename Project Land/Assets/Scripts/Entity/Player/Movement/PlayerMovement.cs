@@ -1,6 +1,7 @@
  using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -10,9 +11,18 @@ public class PlayerMovement : MonoBehaviour
 	private PlayerActionData actionData;
 
 	// Properties // 하드코딩
+	[Header("Data")]
 	[SerializeField] private MovementDataSO data;
 	[SerializeField] private float gravity = -9.81f;
 
+	[Header("Stamina")]
+	[SerializeField] private float maxStamina;
+	[SerializeField] private float curStamina;
+	[SerializeField] private Slider staminaSlider;
+	[SerializeField] private float staminaRecoverySpeed;
+	[SerializeField] private float rollCost;
+
+	// viriables
 	private float verticalVelocity;
 	private Vector3 moveVelocity = Vector3.zero;
 	private Vector3 inputVelocity = Vector3.zero;
@@ -24,10 +34,19 @@ public class PlayerMovement : MonoBehaviour
 		charController = GetComponent<CharacterController>();
 		animator = transform.Find("Visual").GetComponent<PlayerAnimator>();
 		actionData = GetComponent<PlayerActionData>();
+
+		curStamina = maxStamina;
 	}
 
 	private void FixedUpdate()
 	{
+		if (actionData.isDead)
+			return;
+
+		curStamina += Time.fixedDeltaTime * staminaRecoverySpeed;
+		curStamina = Mathf.Clamp(curStamina, 0, maxStamina);
+		staminaSlider.value = curStamina / maxStamina;
+
 		if (charController.isGrounded == false)
 		{
 			verticalVelocity += gravity * Time.fixedDeltaTime;
@@ -93,7 +112,9 @@ public class PlayerMovement : MonoBehaviour
 
 	public void Roll(Vector3 dir = default(Vector3))
 	{
-		if (!charController.isGrounded) return;
+		if (!charController.isGrounded || curStamina < rollCost) return;
+
+		curStamina -= rollCost;
 
 		actionData.isRolling = true;
 		actionData.isActive = false;

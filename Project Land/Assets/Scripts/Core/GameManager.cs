@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
 	private LandManager landManager;
 
 	private int landExpand = 1;
+	private int contribution;
+	public int Contribution { get => contribution; set => contribution = value; }
 
 	private void Awake()
 	{

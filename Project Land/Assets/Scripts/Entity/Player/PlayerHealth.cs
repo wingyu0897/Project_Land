@@ -52,12 +52,13 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 		currentHealth -= damage;
 		currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
-		Tween t1 = DOTween.To(() => healthSliderRed.value, x => healthSliderRed.value = x, currentHealth / maxHealth, 0.3f).SetEase(Ease.OutSine);
+		//Tween t1 = DOTween.To(() => healthSliderRed.value, x => healthSliderRed.value = x, currentHealth / maxHealth, 0.3f).SetEase(Ease.OutSine);
+		healthSliderRed.value = currentHealth / maxHealth;
 		Tween t2 = DOTween.To(() => healthSliderYellow.value, x => healthSliderYellow.value = x, currentHealth / maxHealth, 0.3f).SetEase(Ease.OutSine);
 
 		seq = DOTween.Sequence();
-		seq.Append(t1);
-		seq.AppendInterval(0.3f);
+		//seq.Append(t1);
+		seq.AppendInterval(0.75f);
 		seq.Append(t2);
 
 		if (currentHealth <= 0)
